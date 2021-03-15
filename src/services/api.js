@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {HTTP_CODE} from '../const';
+import {HttpCode} from '../const';
 
 
 const BACKEND_URL = `https://6.react.pages.academy/six-cities`;
@@ -17,7 +17,7 @@ export const createApi = (onUnautorized) => {
 
   const onFail = (err) => {
     const {response} = err;
-    if (response.status === HTTP_CODE.UNAUTHORIZED) {
+    if (response.status === HttpCode.UNAUTHORIZED) {
       onUnautorized();
       throw err;
     }

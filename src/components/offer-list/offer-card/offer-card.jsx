@@ -6,25 +6,30 @@ import {offersPropValid} from './offer-card.prop';
 
 import {getOfferPath, getRatingCount} from '../../../utils';
 import {CARD_CLASS_NAME} from '../../../const';
-import {ActionCreator} from '../../../store/action';
-import {connect} from 'react-redux';
+import {removeActiveOffer, setActiveOffer} from '../../../store/action';
+import {useDispatch} from 'react-redux';
 import {toggleFavorOnServer} from '../../../store/api-actions';
 
-const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isFavorite, mode, setActiveOffer, removeActiveOffer, toggleFavorOnClick}) => {
+const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isFavorite, mode}) => {
+  const dispatch = useDispatch();
   const isCardPremium = isPremium && <div className="place-card__mark"><span>Premium</span></div>;
   const isCardFavorite = isFavorite ? `place-card__bookmark-button--active` : ``;
 
   const cardMouseOverHandler = (cardId) => {
-    setActiveOffer(cardId);
+    if (mode !== `OFFER`) {
+      dispatch(setActiveOffer(cardId));
+    }
   };
 
   const cardMouseLeaveHandler = () => {
-    removeActiveOffer();
+    if (mode !== `OFFER`) {
+      dispatch(removeActiveOffer());
+    }
   };
 
   const cardFavorClickHandler = (cardId, status) => {
     const newStatus = Number(!status);
-    toggleFavorOnClick(cardId, newStatus);
+    dispatch(toggleFavorOnServer(cardId, newStatus));
   };
 
   return (
@@ -67,25 +72,7 @@ const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isF
 OfferCard.propTypes = {
   ...offersPropValid,
   mode: PropTypes.string.isRequired,
-  setActiveOffer: PropTypes.func.isRequired,
-  removeActiveOffer: PropTypes.func.isRequired,
-  toggleFavorOnClick: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setActiveOffer(id) {
-    dispatch(ActionCreator.setActiveOffer(id));
-  },
 
-  removeActiveOffer() {
-    dispatch(ActionCreator.removeActiveOffer());
-  },
-
-  toggleFavorOnClick(id, status) {
-    dispatch(toggleFavorOnServer(id, status));
-  }
-});
-
-
-export {OfferCard};
-export default connect(null, mapDispatchToProps)(OfferCard);
+export default React.memo(OfferCard);

@@ -1,10 +1,6 @@
 import React from 'react';
 import {useRouteMatch} from 'react-router-dom';
-import {connect} from 'react-redux';
-
-import PropTypes from 'prop-types';
-import {reviewsPropValid} from '../../components/offer-property/review-list/review-item/review-item.prop';
-import {offersPropValid} from '../../components/offer-list/offer-card/offer-card.prop';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Header from '../../components/header/header';
 import UserReview from '../../components/offer-property/user-review/user-review';
@@ -13,29 +9,34 @@ import InsideList from '../../components/offer-property/inside-list/inside-list'
 import ReviewList from '../../components/offer-property/review-list/review-list';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
+import Toast from '../../components/toast/toast';
+import Loading from '../../components/loading/loading';
 
 import {getRatingCount} from '../../utils';
 import {AuthorizationStatus} from '../../const';
 import {fetchOpenedOfferData, toggleFavorOnServer} from '../../store/api-actions';
-import Loading from '../../components/loading/loading';
-import {ActionCreator} from '../../store/action';
+import {toggleOpenedCardFavor} from '../../store/action';
 
 
-const OfferProperty = ({authorizationStatus, city, openedOffer, setOpenedOfferData, nearbyOffers, currentReviews, toggleFavorOnClick, toggleOpenedCardFavor}) => {
+const OfferProperty = () => {
+  const {authorizationStatus} = useSelector((state) => state.USER);
+  const {city} = useSelector((state) => state.MAIN);
+  const {openedOffer, nearbyOffers, currentReviews} = useSelector((state) => state.DATA);
+  const dispatch = useDispatch();
 
   const match = useRouteMatch();
   const pathId = match.params.id.slice(1);
 
   if (String(openedOffer.id) !== pathId) {
+    dispatch(fetchOpenedOfferData(pathId));
 
-    setOpenedOfferData(pathId);
     return (
       <Loading />
     );
   }
 
-
-  const reviewList = currentReviews;
+  const MAX_REVIEWS_VISIBLE = 10;
+  const reviewList = currentReviews.length > 10 ? currentReviews.slice(0, MAX_REVIEWS_VISIBLE) : currentReviews;
 
   const {id, images, isPremium, isFavorite, title, rating, type, bedrooms, maxAdults, price, goods, host: {avatarUrl, name, isPro}, description} = openedOffer;
   const isOfferPremium = isPremium && <div className="property__mark"><span>Premium</span></div>;
@@ -44,12 +45,12 @@ const OfferProperty = ({authorizationStatus, city, openedOffer, setOpenedOfferDa
 
   const cardFavorClickHandler = (cardId, status) => {
     const newStatus = status ? 0 : 1;
-    toggleFavorOnClick(cardId, newStatus);
-    toggleOpenedCardFavor();
+    dispatch(toggleFavorOnServer(cardId, newStatus));
+    dispatch(toggleOpenedCardFavor());
   };
-
   return (
     <div className="page">
+      <Toast />
       <Header />
       <main className="page__main page__main--property">
         <section className="property">
@@ -116,21 +117,19 @@ const OfferProperty = ({authorizationStatus, city, openedOffer, setOpenedOfferDa
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviewList.length}</span></h2>
                 {
-                  reviewList.length ?
-                    <ReviewList reviews={reviewList} />
-                    :
-                    <Loading />
+                  reviewList && <ReviewList reviews={reviewList} />
                 }
 
                 {authorizationStatus === AuthorizationStatus.AUTH ? <UserReview /> : ``}
               </section>
             </div>
           </div>
-          <Map offers={nearbyOffers} city={city} mode="OFFER"/>
+          {
+            nearbyOffers.length && <Map offers={[...nearbyOffers, openedOffer]} city={city} mode="OFFER"/>
+          }
         </section>
         {
-          nearbyOffers.length
-            ?
+          nearbyOffers.length &&
             <div className="container">
               <section className="near-places places">
                 <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -139,47 +138,10 @@ const OfferProperty = ({authorizationStatus, city, openedOffer, setOpenedOfferDa
                 </div>
               </section>
             </div>
-            :
-            <Loading />
         }
       </main>
     </div>
-
   );
 };
 
-OfferProperty.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  openedOffer: PropTypes.oneOfType([PropTypes.shape(offersPropValid), PropTypes.object]).isRequired,
-  nearbyOffers: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape(offersPropValid)), PropTypes.array]).isRequired,
-  currentReviews: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape(reviewsPropValid)), PropTypes.array]).isRequired,
-  city: PropTypes.string.isRequired,
-  setOpenedOfferData: PropTypes.func.isRequired,
-  toggleFavorOnClick: PropTypes.func.isRequired,
-  toggleOpenedCardFavor: PropTypes.func.isRequired
-};
-
-const mapStateToProps = ({offers, city, authorizationStatus, openedOffer, nearbyOffers, currentReviews}) => ({
-  offers,
-  city,
-  authorizationStatus,
-  openedOffer,
-  nearbyOffers,
-  currentReviews,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setOpenedOfferData(id) {
-    dispatch(fetchOpenedOfferData(id));
-  },
-  toggleFavorOnClick(id, status) {
-    dispatch(toggleFavorOnServer(id, status));
-  },
-  toggleOpenedCardFavor() {
-    dispatch(ActionCreator.toggleOpenedCardFavor());
-  }
-});
-
-
-export {OfferProperty};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferProperty);
+export default OfferProperty;

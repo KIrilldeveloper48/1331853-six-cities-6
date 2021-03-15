@@ -1,21 +1,22 @@
 import React, {useRef} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import LocationBtn from '../../components/common/location-btn';
 import Header from '../../components/header/header';
 import {login} from '../../store/api-actions';
-import {PropTypes} from 'prop-types';
 
-const Login = ({formSubmit, city}) => {
+const Login = () => {
+  const {city} = useSelector((state) => state.MAIN);
+  const dispatch = useDispatch();
+
   const loginRef = useRef();
   const passwordRef = useRef();
 
   const formSubmitHandler = (evt) => {
     evt.preventDefault();
-
-    formSubmit({
+    dispatch(login({
       login: loginRef.current.value,
       password: passwordRef.current.value,
-    });
+    }));
   };
 
   return (
@@ -48,20 +49,4 @@ const Login = ({formSubmit, city}) => {
   );
 };
 
-Login.propTypes = {
-  formSubmit: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired
-};
-
-const mapStateToProps = ({city}) => ({
-  city
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  formSubmit(authData) {
-    dispatch(login(authData));
-  }
-});
-
-export {Login};
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

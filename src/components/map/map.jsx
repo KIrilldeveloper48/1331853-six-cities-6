@@ -4,18 +4,19 @@ import {PropTypes} from 'prop-types';
 import {offersPropValid} from '../offer-list/offer-card/offer-card.prop';
 
 import leaflet from 'leaflet';
-import "leaflet/dist/leaflet.css";
+import 'leaflet/dist/leaflet.css';
 import {MAP_CLASS_NAME} from '../../const';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
-
-const Map = ({offers, mode, city, activeOffer}) => {
+const Map = ({offers, mode, city}) => {
 
   if (!offers.length) {
     return ``;
   }
-
   const mapRef = useRef();
+  const {activeOffer} = useSelector((state) => state.MAIN);
+  const {openedOffer} = useSelector((state) => state.DATA);
+
   const cityLocation = offers[0].city.location;
 
   useEffect(() => {
@@ -32,32 +33,42 @@ const Map = ({offers, mode, city, activeOffer}) => {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(mapRef.current);
+    return () => {
+      mapRef.current.remove();
+    };
 
+  }, [city]);
+
+  useEffect(() => {
+    const markers = [];
     offers.forEach((point) => {
+      const isActiveOffer = activeOffer === point.id ? `./img/pin-active.svg` : `./img/pin.svg`;
+      const isOpenedOffer = openedOffer.id === point.id ? `./img/pin-active.svg` : `./img/pin.svg`;
+
       const customIcon = leaflet.icon({
-        iconUrl: `${activeOffer !== point.id ? `./img/pin.svg` : `./img/pin-active.svg`}`,
+        iconUrl: mode === `OFFER` ? isOpenedOffer : isActiveOffer,
         iconSize: [27, 39],
       });
 
-      leaflet.marker({
+      const marker = leaflet.marker({
         lat: point.location.latitude,
         lng: point.location.longitude,
       },
       {
         icon: customIcon
       })
-        .addTo(mapRef.current)
         .bindPopup(point.title);
+      markers.push(marker);
     });
-
+    const markersGroup = leaflet.layerGroup(markers);
+    mapRef.current.addLayer(markersGroup);
     return () => {
-      mapRef.current.remove();
+      markersGroup.clearLayers();
     };
-
-  }, [city, activeOffer]);
+  }, [activeOffer, city, offers]);
 
   return (
-    <section id="map" className={`${MAP_CLASS_NAME[mode]} map`} style={{width: `${mode === `OFFER` && `1144px`}`, margin: `${mode === `OFFER` && `auto`}`}} ref={mapRef}/>
+    <section id="map" className={`${MAP_CLASS_NAME[mode]} map`} style={{width: `${mode === `OFFER` && `1144px`}`, margin: `${mode === `OFFER` && `auto auto 50px auto`}`}} />
   );
 };
 
@@ -65,12 +76,8 @@ Map.propTypes = {
   offers: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.shape(offersPropValid)), PropTypes.bool]).isRequired,
   mode: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
-  activeOffer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired
 };
-const mapStateToProps = ({activeOffer}) => ({
-  activeOffer
-});
 
-export {Map};
-export default connect(mapStateToProps, null)(Map);
+
+export default Map;
 

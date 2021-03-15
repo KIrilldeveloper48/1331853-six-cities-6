@@ -1,10 +1,12 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {AuthorizationStatus, Routes} from './../../../const';
 
-const IsLogined = ({authorizationStatus, userName, avatarUrl}) => {
+const IsLogined = () => {
+
+  const {authorizationStatus, userName, avatarUrl} = useSelector((state) => state.USER);
+
   return (
     <Link className="header__nav-link header__nav-link--profile" to={Routes.FAVOR}>
       <div className="header__avatar-wrapper user__avatar-wrapper" style={{backgroundImage: `url(${avatarUrl})`}}>
@@ -14,17 +16,4 @@ const IsLogined = ({authorizationStatus, userName, avatarUrl}) => {
   );
 };
 
-IsLogined.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = ({authorizationStatus, userName, avatarUrl}) => ({
-  authorizationStatus,
-  userName,
-  avatarUrl
-});
-
-export {IsLogined};
-export default connect(mapStateToProps, null)(IsLogined);
+export default IsLogined;

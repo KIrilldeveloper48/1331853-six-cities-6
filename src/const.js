@@ -84,7 +84,18 @@ export const LOCAL_STORE_KEYS = {
   AVATAR_URL: `avatarUrl`
 };
 
-export const HTTP_CODE = {
+export const HttpCode = {
   UNAUTHORIZED: 401,
   NOT_FOUND: 404
+};
+
+export const ReviewValid = {
+  MAX_LENGTH: 300,
+  MIN_LENGTH: 50
+};
+
+export const ReviewLoadingStatus = {
+  LOADED: `loaded`,
+  LOADING: `loading`,
+  LOADING_FAILED: `loadingFailed`
 };

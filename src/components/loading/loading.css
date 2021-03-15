@@ -1,0 +1,45 @@
+.text {
+  height: auto;
+  width: 100%;
+  top: 50%;
+  margin-top: -30px;
+  text-align: center;
+  position: absolute;
+  transform: skew(-15deg);
+}
+
+.text::before {
+  content: "Loading";
+  font-family: rubik, arial, sans-serif;
+  color: white;
+  vertical-align: -50%;
+  letter-spacing: 1;
+  font-size: 40px;
+  font-weight: 300;
+  padding: 11px 23px 11px 23px;
+  transform: skew(-15deg);
+  background: #4481c3;
+  border-radius: 3px;
+  -moz-animation: fade 3s ease-in-out infinite;
+  -webkit-animation: fade 3s ease-in-out infinite;
+  animation: fade 3s ease-in-out infinite;
+
+}
+
+@keyframes fade {
+
+  0%,
+  100% {
+    text-shadow: 0px 0px 0px white;
+    color: white;
+  }
+
+  25%,
+  75% {
+    color: transparent;
+  }
+
+  50% {
+    text-shadow: 0px 0px 15px;
+  }
+}

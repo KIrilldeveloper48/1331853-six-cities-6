@@ -1,8 +1,5 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
-
-import PropTypes from 'prop-types';
-import {offersPropValid} from '../../components/offer-list/offer-card/offer-card.prop';
+import React, {useEffect, useRef} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Header from '../../components/header/header';
 import Locations from '../../components/main/locations/locations';
@@ -10,21 +7,35 @@ import OfferList from '../../components/offer-list/offer-list';
 import Sort from '../../components/main/sort/sort';
 import Map from '../../components/map/map';
 import MainEmpty from './empty/empty';
-
-import {getOffers, getSortedOffers} from '../../utils';
-import {SORT_TEXTS} from '../../const';
-import {fetchOfferList} from '../../store/api-actions';
+import Toast from '../../components/toast/toast';
 import Loading from '../../components/loading/loading';
 
-const Main = ({offers, city, currentSort, isDataLoaded, onLoadData}) => {
-  const currentOffers = getOffers(city, offers);
-  const sortedOffers = getSortedOffers(currentSort, currentOffers);
+import {fetchOfferList} from '../../store/api-actions';
+import {getCurrentOffers, getSortedOffers} from '../../store/selectors';
+import {setActiveOffer, setOpenOffer} from '../../store/action';
+
+const Main = () => {
+  const {city} = useSelector((state) => state.MAIN);
+  const {isDataLoaded} = useSelector((state) => state.DATA);
+  const dispatch = useDispatch();
+
+  const currentOffers = useSelector(getCurrentOffers);
+  const sortedOffers = useSelector(getSortedOffers);
+  const cardSectionRef = useRef();
 
   useEffect(() => {
     if (!isDataLoaded) {
-      onLoadData();
+      dispatch(fetchOfferList());
     }
   }, [isDataLoaded]);
+
+  useEffect(() => {
+    if (isDataLoaded) {
+      cardSectionRef.current.scrollTop = 0;
+      dispatch(setActiveOffer(``));
+      dispatch(setOpenOffer({}));
+    }
+  }, [city]);
 
   if (!isDataLoaded) {
     return (
@@ -35,6 +46,7 @@ const Main = ({offers, city, currentSort, isDataLoaded, onLoadData}) => {
   return (
     <>
       <div className="page page--gray page--main">
+        <Toast />
         <Header />
         <main className={`page__main page__main--index ${!currentOffers.length ? `page__main--index-empty` : ``}`}>
           <h1 className="visually-hidden">Cities</h1>
@@ -44,21 +56,12 @@ const Main = ({offers, city, currentSort, isDataLoaded, onLoadData}) => {
           {currentOffers.length ?
             <div className="cities">
               <div className="cities__places-container container">
-                <section className="cities__places places">
+                <section className="cities__places places" ref={cardSectionRef}>
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{currentOffers.length} places to stay in {city}</b>
-                  <form className="places__sorting" action="#" method="get">
-                    <span className="places__sorting-caption">Sort by </span>
-                    <span className="places__sorting-type" tabIndex={0}>
-                      {SORT_TEXTS[currentSort]}
-                      <svg className="places__sorting-arrow" width={7} height={4}>
-                        <use xlinkHref="#icon-arrow-select" />
-                      </svg>
-                    </span>
-                    <Sort />
-                  </form>
+                  <Sort />
                   <div className="cities__places-list places__list tabs__content">
-                    <OfferList offers={sortedOffers} mode="MAIN" />
+                    <OfferList offers={sortedOffers} mode="MAIN"/>
                   </div>
                 </section>
                 <div className="cities__right-section">
@@ -75,27 +78,4 @@ const Main = ({offers, city, currentSort, isDataLoaded, onLoadData}) => {
   );
 };
 
-
-Main.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(offersPropValid).isRequired).isRequired,
-  city: PropTypes.string.isRequired,
-  currentSort: PropTypes.string.isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({city, offers, currentSort, isDataLoaded}) => ({
-  offers,
-  city,
-  currentSort,
-  isDataLoaded,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
-    dispatch(fetchOfferList());
-  }
-});
-
-export {Main};
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;
