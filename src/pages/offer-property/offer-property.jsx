@@ -25,7 +25,7 @@ const OfferProperty = () => {
   const dispatch = useDispatch();
 
   const match = useRouteMatch();
-  const pathId = match.params.id.slice(1);
+  const pathId = match.params.id;
 
   if (String(openedOffer.id) !== pathId) {
     dispatch(fetchOpenedOfferData(pathId));
