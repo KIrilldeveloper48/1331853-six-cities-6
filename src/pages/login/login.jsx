@@ -26,17 +26,17 @@ const Login = () => {
         <main className="page__main page__main--login">
           <div className="page__login-container container">
             <section className="login">
-              <h1 className="login__title">Sign in</h1>
+              <h1 className="login__title" data-testid="login-title">Sign in</h1>
               <form className="login__form form" action="#" method="post" onSubmit={formSubmitHandler}>
                 <div className="login__input-wrapper form__input-wrapper">
-                  <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required ref={loginRef}/>
+                  <label className="visually-hidden" htmlFor="input-email">E-mail</label>
+                  <input id="input-email" className="login__input form__input" type="email" name="email" placeholder="Email" required ref={loginRef} data-testid="login"/>
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
-                  <label className="visually-hidden">Password</label>
-                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required ref={passwordRef}/>
+                  <label className="visually-hidden" htmlFor="input-password">Password</label>
+                  <input id="input-password" className="login__input form__input" type="password" name="password" placeholder="Password" required ref={passwordRef} data-testid="password"/>
                 </div>
-                <button className="login__submit form__submit button" type="submit">Sign in</button>
+                <button className="login__submit form__submit button" type="submit" data-testid="login-submit">Sign in</button>
               </form>
             </section>
             <section className="locations locations--login locations--current">
