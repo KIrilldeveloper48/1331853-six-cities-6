@@ -1,10 +1,7 @@
 import React from 'react';
 import configureStore from 'redux-mock-store';
 import * as redux from 'react-redux';
-import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
-import {Router} from 'react-router';
-import userEvent from '@testing-library/user-event';
 import Sort from './sort';
 import {SORT_LIST} from '../../../const';
 
