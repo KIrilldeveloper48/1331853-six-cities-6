@@ -5,7 +5,7 @@ import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {Router} from 'react-router';
 
-import OfferList from '../offer-list';
+import OfferList from './offer-list';
 
 const mockStore = configureStore();
 const testOfferList = [{
