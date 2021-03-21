@@ -8,9 +8,9 @@ import ReviewItem from './review-item/review-item';
 
 const ReviewList = ({reviews}) => {
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testid="review-list">
       {
-        reviews.map((review) => <ReviewItem key={review.id} review={review}/>)
+        reviews.map((review) => <ReviewItem key={review.id} review={review} />)
       }
     </ul>
   );
