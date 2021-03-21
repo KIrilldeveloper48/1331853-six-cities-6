@@ -20,7 +20,7 @@ const Sort = () => {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid="sort">
       <span className="places__sorting-caption" >Sort by </span>
       <span className="places__sorting-type" tabIndex={0} onClick={() => selectClickHandler()} data-testid="current-sort-type">
         {SORT_TEXTS[currentSort]}

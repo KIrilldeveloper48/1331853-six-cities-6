@@ -12,7 +12,7 @@ const Locations = () => {
   };
 
   return (
-    <section className="locations container">
+    <section className="locations container" data-testid="locations">
       <ul className="locations__list tabs__list" >
         {CITY_LIST.map((item) => (
           <li key={item} className="locations__item">
