@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useRouteMatch} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -27,9 +27,13 @@ const OfferProperty = () => {
   const match = useRouteMatch();
   const pathId = match.params.id;
 
-  if (String(openedOffer.id) !== pathId) {
-    dispatch(fetchOpenedOfferData(pathId));
+  useEffect(() => {
+    if (String(openedOffer.id) !== pathId) {
+      dispatch(fetchOpenedOfferData(pathId));
+    }
+  }, [pathId]);
 
+  if (String(openedOffer.id) !== pathId) {
     return (
       <Loading />
     );
@@ -49,7 +53,7 @@ const OfferProperty = () => {
     dispatch(toggleOpenedCardFavor());
   };
   return (
-    <div className="page">
+    <div className="page" data-testid="offer-property">
       <Toast />
       <Header />
       <main className="page__main page__main--property">
