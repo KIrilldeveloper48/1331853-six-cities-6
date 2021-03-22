@@ -26,7 +26,6 @@ const OfferProperty = () => {
 
   const match = useRouteMatch();
   const pathId = match.params.id;
-
   useEffect(() => {
     if (String(openedOffer.id) !== pathId) {
       dispatch(fetchOpenedOfferData(pathId));
@@ -43,8 +42,8 @@ const OfferProperty = () => {
   const reviewList = currentReviews.length > 10 ? currentReviews.slice(0, MAX_REVIEWS_VISIBLE) : currentReviews;
 
   const {id, images, isPremium, isFavorite, title, rating, type, bedrooms, maxAdults, price, goods, host: {avatarUrl, name, isPro}, description} = openedOffer;
-  const isOfferPremium = isPremium && <div className="property__mark"><span>Premium</span></div>;
-  const isUserPro = isPro && <span className="property__user-status">Pro</span>;
+  const isOfferPremium = isPremium && <div className="property__mark" data-testid="property-mark"><span>Premium</span></div>;
+  const isUserPro = isPro && <span className="property__user-status" data-testid="offer-property-user-pro">Pro</span>;
   const isCardFavorite = isFavorite ? `property__bookmark-button--active` : ``;
 
   const cardFavorClickHandler = (cardId, status) => {
@@ -62,13 +61,13 @@ const OfferProperty = () => {
             <Gallery images={images}/>
           </div>
           <div className="property__container container">
-            <div className="property__wrapper">
+            <div className="property__wrapper" data-testid="property-wrapper">
               {isOfferPremium}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isCardFavorite} button`} type="button" onClick={()=> cardFavorClickHandler(id, isFavorite)}>
+                <button className={`property__bookmark-button ${isCardFavorite} button`} type="button" onClick={()=> cardFavorClickHandler(id, isFavorite)} data-testid="offer-property-bookmark">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -83,7 +82,7 @@ const OfferProperty = () => {
                 <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
-                <li className="property__feature property__feature--entire">
+                <li className="property__feature property__feature--entire" data-testid="offer-property-type">
                   {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
@@ -103,11 +102,11 @@ const OfferProperty = () => {
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
-                <div className="property__host-user user">
+                <div className="property__host-user user" data-testid="offer-property-user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={avatarUrl} alt="Host avatar" width={74} height={74} />
+                    <img className="property__avatar user__avatar" src={avatarUrl} alt="Host avatar" width={74} height={74} data-testid="offer-property-user-avatar"/>
                   </div>
-                  <span className="property__user-name">
+                  <span className="property__user-name" data-testid="offer-property-user-name">
                     {name}
                   </span>
                   {isUserPro}
@@ -119,7 +118,7 @@ const OfferProperty = () => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviewList.length}</span></h2>
+                <h2 className="reviews__title">Reviews · <span className="reviews__amount" data-testid="offer-property-review-count">{reviewList.length}</span></h2>
                 {
                   reviewList && <ReviewList reviews={reviewList} />
                 }
