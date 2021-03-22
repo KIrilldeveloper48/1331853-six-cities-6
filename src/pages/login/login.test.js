@@ -22,6 +22,7 @@ it(`Render 'Login' when user navigate to '/login' url`, () => {
       </redux.Provider>
   );
 
+  expect(screen.getByTestId(`header`)).toBeInTheDocument();
   expect(screen.getByTestId(`login-title`)).toBeInTheDocument();
   expect(screen.getByTestId(`login-submit`)).toBeInTheDocument();
   expect(screen.getByLabelText(`E-mail`)).toBeInTheDocument();

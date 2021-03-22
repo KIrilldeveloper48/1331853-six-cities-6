@@ -68,7 +68,7 @@ const testDataWithFilledOfferList = {
         }
       },
       {
-        id: 1,
+        id: 3,
         city: {
           location: {
             latitude: 52.370216,
