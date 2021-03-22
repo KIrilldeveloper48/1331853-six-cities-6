@@ -20,9 +20,9 @@ const Sort = () => {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid="sort">
       <span className="places__sorting-caption" >Sort by </span>
-      <span className="places__sorting-type" tabIndex={0} onClick={() => selectClickHandler()}>
+      <span className="places__sorting-type" tabIndex={0} onClick={() => selectClickHandler()} data-testid="current-sort-type">
         {SORT_TEXTS[currentSort]}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
@@ -31,7 +31,7 @@ const Sort = () => {
       <ul className="places__options places__options--custom" ref={selectRef}>
         {
           SORT_LIST.map(({text, type}) => (
-            <li key={type} className={`places__option ${currentSort === type ? `places__option--active` : ``}`} data-sort-type={type} tabIndex={0} onClick={(evt) => sortTypeClickHandler(evt)}>
+            <li key={type} className={`places__option ${currentSort === type ? `places__option--active` : ``}`} data-sort-type={type} data-testid={type} tabIndex={0} onClick={(evt) => sortTypeClickHandler(evt)}>
               {text}
             </li>
           ))

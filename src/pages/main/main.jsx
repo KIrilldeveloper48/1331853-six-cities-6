@@ -30,7 +30,7 @@ const Main = () => {
   }, [isDataLoaded]);
 
   useEffect(() => {
-    if (isDataLoaded) {
+    if (isDataLoaded && currentOffers.length) {
       cardSectionRef.current.scrollTop = 0;
       dispatch(setActiveOffer(``));
       dispatch(setOpenOffer({}));
@@ -45,10 +45,10 @@ const Main = () => {
 
   return (
     <>
-      <div className="page page--gray page--main">
+      <div className="page page--gray page--main" data-testid="main-page">
         <Toast />
         <Header />
-        <main className={`page__main page__main--index ${!currentOffers.length ? `page__main--index-empty` : ``}`}>
+        <main className={`page__main page__main--index ${!currentOffers.length ? `page__main--index-empty` : ``}`} data-testid="main-page-main-tag">
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <Locations />

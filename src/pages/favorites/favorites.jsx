@@ -40,7 +40,7 @@ const Favorites = () => {
     <>
       {
         favoriteList.length ?
-          <div className="page">
+          <div className="page" data-testid="favorites">
             <Toast />
             <Header />
             <main className="page__main page__main--favorites">

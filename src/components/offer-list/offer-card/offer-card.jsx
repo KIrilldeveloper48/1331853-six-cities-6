@@ -33,20 +33,20 @@ const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isF
   };
 
   return (
-    <article className={`${CARD_CLASS_NAME[mode].article} place-card`} onMouseOver={() => cardMouseOverHandler(id)} onMouseLeave={() => cardMouseLeaveHandler()}>
+    <article className={`${CARD_CLASS_NAME[mode].article} place-card`} onMouseOver={() => cardMouseOverHandler(id)} onMouseLeave={() => cardMouseLeaveHandler()} data-testid={`card-${id}`}>
       {isCardPremium}
-      <div className={`${CARD_CLASS_NAME[mode].image} place-card__image-wrapper`}>
+      <div className={`${CARD_CLASS_NAME[mode].image} place-card__image-wrapper`} data-testid={`card-${id}-image`}>
         <Link to={getOfferPath(id)}>
           <img className="place-card__image" src={previewImage} alt="Place image" width={260} height={200} />
         </Link>
       </div>
-      <div className={`${CARD_CLASS_NAME[mode].info ? CARD_CLASS_NAME[mode].info : ``} place-card__info`}>
+      <div className={`${CARD_CLASS_NAME[mode].info ? CARD_CLASS_NAME[mode].info : ``} place-card__info`} data-testid={`card-${id}-info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isCardFavorite}`} type="button" onClick={()=> cardFavorClickHandler(id, isFavorite)}>
+          <button className={`place-card__bookmark-button button ${isCardFavorite}`} type="button" onClick={() => cardFavorClickHandler(id, isFavorite)} data-testid={`card-${id}-bookmark`}>
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>

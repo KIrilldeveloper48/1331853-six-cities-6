@@ -12,13 +12,16 @@ const Locations = () => {
   };
 
   return (
-    <section className="locations container">
+    <section className="locations container" data-testid="locations">
       <ul className="locations__list tabs__list" >
-        {CITY_LIST.map((item) => <li key={item} className="locations__item">
-          <a className={`locations__item-link tabs__item ${item === city ? `tabs__item--active` : ``}`} >
-            <span onClick={() => menuClickHandler(item)}>{item}</span>
-          </a>
-        </li>)}
+        {CITY_LIST.map((item) => (
+          <li key={item} className="locations__item">
+            <a className={`locations__item-link tabs__item ${item === city ? `tabs__item--active` : ``}`} >
+              <span onClick={() => menuClickHandler(item)}>{item}</span>
+            </a>
+          </li>
+        )
+        )}
       </ul>
     </section>
   );

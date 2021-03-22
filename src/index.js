@@ -11,6 +11,8 @@ import {requiredAuthorization} from './store/action';
 import {AuthorizationStatus} from './const';
 import {checkAuth} from './store/api-actions';
 import {redirect} from './store/middlewares/redirect';
+import {BrowserRouter} from 'react-router-dom';
+import browserHistory from './browser-history';
 
 
 const api = createApi(
@@ -33,8 +35,11 @@ store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <BrowserRouter history={browserHistory}>
+        <App />
+      </BrowserRouter>
     </Provider>,
+
 
     document.querySelector(`#root`)
 );
