@@ -8,10 +8,10 @@ import userEvent from '@testing-library/user-event';
 
 
 const mockStore = configureStore();
+const sortTypeForTest = `popular`;
 
 describe(`Test 'Sort'`, () => {
   it(`'Sort' should be render correctly`, () => {
-    const sortTypeForTest = `popular`;
 
     render(
         <redux.Provider store={mockStore({MAIN: {currentSort: sortTypeForTest}})}>
@@ -38,7 +38,6 @@ describe(`Test 'Sort'`, () => {
 
   it(`Logic should be worked correctly`, () => {
     const fakeDispatch = jest.spyOn(redux, `useDispatch`);
-    const sortTypeForTest = `popular`;
 
     render(
         <redux.Provider store={mockStore({MAIN: {currentSort: ``}})}>
@@ -51,7 +50,7 @@ describe(`Test 'Sort'`, () => {
     userEvent.click(screen.getByTestId(`current-sort-type`));
     expect(screen.getByTestId(`sort-select-list`)).toHaveClass(`places__options--opened`);
 
-    userEvent.click(screen.getByTestId(`popular`));
+    userEvent.click(screen.getByTestId(sortTypeForTest));
     expect(fakeDispatch).toBeCalled();
     expect(screen.getByTestId(`sort-select-list`)).not.toHaveClass(`places__options--opened`);
   });
