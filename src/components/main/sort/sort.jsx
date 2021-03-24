@@ -28,7 +28,7 @@ const Sort = () => {
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className="places__options places__options--custom" ref={selectRef}>
+      <ul className="places__options places__options--custom" ref={selectRef} data-testid="sort-select-list">
         {
           SORT_LIST.map(({text, type}) => (
             <li key={type} className={`places__option ${currentSort === type ? `places__option--active` : ``}`} data-sort-type={type} data-testid={type} tabIndex={0} onClick={(evt) => sortTypeClickHandler(evt)}>
