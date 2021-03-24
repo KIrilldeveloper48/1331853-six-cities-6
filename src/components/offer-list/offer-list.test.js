@@ -9,27 +9,75 @@ import OfferList from './offer-list';
 
 const mockStore = configureStore();
 const testOfferList = [{
-  id: 1,
-  previewImage: `img/1.png`,
-  price: 120,
-  type: `apartment`,
-  rating: 3,
-  isPremium: true,
-  title: `bad room`,
-  isFavorite: true,
+  "bedrooms": 3,
+  "city": {
+    "location": {
+      "latitude": 1,
+      "longitude": 1,
+      "zoom": 1
+    },
+    "name": `Paris`
+  },
+  "description": ``,
+  "goods": [`1`, `2`],
+  "host": {
+    "avatarUrl": ``,
+    "id": 3,
+    "isPro": false,
+    "name": ``
+  },
+  "id": 1,
+  "images": [``, ``],
+  "isFavorite": false,
+  "isPremium": false,
+  "location": {
+    "latitude": 1,
+    "longitude": 1,
+    "zoom": 1
+  },
+  "maxAdults": 1,
+  "previewImage": ``,
+  "price": 100,
+  "rating": 4,
+  "title": ``,
+  "type": ``
 },
 {
-  id: 2,
-  previewImage: `img/2.png`,
-  price: 100,
-  type: `apartment`,
-  rating: 2,
-  isPremium: false,
-  title: `beautiful apartment`,
-  isFavorite: false,
+  "bedrooms": 3,
+  "city": {
+    "location": {
+      "latitude": 1,
+      "longitude": 1,
+      "zoom": 1
+    },
+    "name": `Paris`
+  },
+  "description": ``,
+  "goods": [`1`, `2`],
+  "host": {
+    "avatarUrl": ``,
+    "id": 3,
+    "isPro": false,
+    "name": ``
+  },
+  "id": 2,
+  "images": [``, ``],
+  "isFavorite": false,
+  "isPremium": false,
+  "location": {
+    "latitude": 1,
+    "longitude": 1,
+    "zoom": 1
+  },
+  "maxAdults": 1,
+  "previewImage": ``,
+  "price": 100,
+  "rating": 4,
+  "title": ``,
+  "type": ``
 }];
 
-it(`Render 'OfferList'`, () => {
+it(`'OfferList' should be render correctly`, () => {
   const history = createMemoryHistory();
 
   render(
