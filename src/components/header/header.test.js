@@ -12,7 +12,7 @@ it(`Render 'Header'`, () => {
   const history = createMemoryHistory();
 
   render(
-      <redux.Provider store={mockStore({USER: {authorizationStatus: `NO_AUTH`, userName: `Kirill`, avatarUrl: `src/image`}})}>
+      <redux.Provider store={mockStore({USER: {authorizationStatus: ``, userName: ``, avatarUrl: ``}})}>
         <Router history={history}>
           <Header />
         </Router>
@@ -21,4 +21,5 @@ it(`Render 'Header'`, () => {
 
   expect(screen.getByTestId(`header-logo`)).toBeInTheDocument();
   expect(screen.getByTestId(`header-nav`)).toBeInTheDocument();
+  expect(screen.getByTestId(`is-logined`)).toBeInTheDocument();
 });
