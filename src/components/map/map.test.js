@@ -6,26 +6,46 @@ import Map from './map';
 
 
 const mockStore = configureStore();
-const offerTest = [{
-  "title": `Beautiful & luxurious studio at great location`,
-  "id": 1,
+const testOfferList = [{
+  "bedrooms": 3,
   "city": {
     "location": {
-      "latitude": 52.370216,
-      "longitude": 4.895168,
+      "latitude": 1,
+      "longitude": 1,
+      "zoom": 1
     },
+    "name": `Paris`
   },
+  "description": ``,
+  "goods": [`1`, `2`],
+  "host": {
+    "avatarUrl": ``,
+    "id": 3,
+    "isPro": false,
+    "name": ``
+  },
+  "id": 1,
+  "images": [``, ``],
+  "isFavorite": false,
+  "isPremium": false,
   "location": {
-    "latitude": 52.35514938496378,
-    "longitude": 4.673877537499948,
+    "latitude": 1,
+    "longitude": 1,
+    "zoom": 1
   },
+  "maxAdults": 1,
+  "previewImage": ``,
+  "price": 100,
+  "rating": 4,
+  "title": ``,
+  "type": ``
 }];
 
-it(`Render 'Map'`, () => {
+it(`'Map' should be render correctly`, () => {
 
   render(
       <redux.Provider store={mockStore({MAIN: {activeOffer: {id: 1}}, DATA: {openedOffer: {id: 2}}})}>
-        <Map offers={offerTest} mode="MAIN" city="Paris"/>
+        <Map offers={testOfferList} mode="MAIN" city="Paris"/>
       </redux.Provider>
   );
 
