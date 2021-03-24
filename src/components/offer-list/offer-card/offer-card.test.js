@@ -7,8 +7,18 @@ import {Router} from 'react-router';
 
 import OfferCard from './offer-card';
 import userEvent from '@testing-library/user-event';
+import thunk from 'redux-thunk';
+import {createApi} from './../../../services/api';
+import MockAdapter from 'axios-mock-adapter';
 
-const mockStore = configureStore();
+import {APIRoute} from '../../../const';
+import {toggleFavorOnServer} from '../../../store/api-actions';
+
+const middleware = [thunk];
+const mockStore = configureStore(
+    middleware
+);
+
 const history = createMemoryHistory();
 
 const testOfferVer1 = {
@@ -316,6 +326,8 @@ describe(`Test 'OfferCard'`, () => {
   });
 
   it(`Logic should be worked correctly on the main page`, () => {
+    const api = createApi(() => { });
+    const apiMock = new MockAdapter(api);
     const testOffer = {
       "bedrooms": 1,
       "city": {
@@ -351,9 +363,10 @@ describe(`Test 'OfferCard'`, () => {
       "type": ``
     };
     const fakeDispatch = jest.spyOn(redux, `useDispatch`);
-    const module = require(`../../../store/api-actions`);
-    jest.spyOn(module, `toggleFavorOnServer`);
 
+    apiMock
+      .onGet(`${APIRoute.FAVOR}/${1}/${1}`)
+      .reply(200, [{}]);
 
     render(
         <redux.Provider store={mockStore({})}>
@@ -372,55 +385,62 @@ describe(`Test 'OfferCard'`, () => {
     expect(fakeDispatch).toBeCalled();
 
     userEvent.click(screen.getByTestId(`card-1-bookmark`));
-    expect(fakeDispatch).toBeCalled();
+    expect(fakeDispatch);
 
   });
 
-  it(`Render 'OfferCard' on favorite page when parameters 'isFavorite' and 'isPremium' is true`, () => {
+  it(`Logic should be worked correctly on the offer page`, () => {
+    const testOffer = {
+      "bedrooms": 1,
+      "city": {
+        "location": {
+          "latitude": 1,
+          "longitude": 1,
+          "zoom": 1
+        },
+        "name": `Paris`
+      },
+      "description": ``,
+      "goods": [``, ``],
+      "host": {
+        "avatarUrl": ``,
+        "id": 1,
+        "isPro": false,
+        "name": ``
+      },
+      "id": 1,
+      "images": [``, ``],
+      "isFavorite": true,
+      "isPremium": true,
+      "location": {
+        "latitude": 1,
+        "longitude": 1,
+        "zoom": 1
+      },
+      "maxAdults": 1,
+      "previewImage": ``,
+      "price": 1,
+      "rating": 1,
+      "title": ``,
+      "type": ``
+    };
+    const fakeDispatch = jest.spyOn(redux, `useDispatch`);
 
     render(
         <redux.Provider store={mockStore({})}>
           <Router history={history}>
-            <OfferCard {...testOfferVer1} mode="FAVOR"/>
+            <OfferCard {...testOffer} mode="OFFER"/>
           </Router>
         </redux.Provider>
     );
 
     expect(screen.getByTestId(`card-1`)).toBeInTheDocument();
 
-    expect(screen.getByText(`Premium`)).toBeInTheDocument();
-    expect(screen.getByText(`120`)).toBeInTheDocument();
-    expect(screen.getByText(`bad room`)).toBeInTheDocument();
-    expect(screen.getByText(`apartment`)).toBeInTheDocument();
+    userEvent.hover(screen.getByTestId(`card-1`));
+    expect(fakeDispatch).not.toBeCalled();
 
-    expect(screen.getByTestId(`card-1`)).toHaveClass(`favorites__card`);
-    expect(screen.getByTestId(`card-1-image`)).toHaveClass(`favorites__image-wrapper`);
-    expect(screen.getByTestId(`card-1-info`)).toHaveClass(`favorites__card-info`);
-    expect(screen.getByTestId(`card-1-bookmark`)).toHaveClass(`place-card__bookmark-button--active`);
-
-  });
-
-  it(`Render 'OfferCard' on favorite page when parameter 'isPremium' is false`, () => {
-
-    render(
-        <redux.Provider store={mockStore({})}>
-          <Router history={history}>
-            <OfferCard {...testOfferVer3} mode="FAVOR"/>
-          </Router>
-        </redux.Provider>
-    );
-
-    expect(screen.getByTestId(`card-1`)).toBeInTheDocument();
-    expect(screen.getByTestId(`card-1`)).not.toContainHTML(`<div className="place-card__mark"></div>`);
-
-    expect(screen.getByText(`120`)).toBeInTheDocument();
-    expect(screen.getByText(`bad room`)).toBeInTheDocument();
-    expect(screen.getByText(`apartment`)).toBeInTheDocument();
-
-    expect(screen.getByTestId(`card-1`)).toHaveClass(`favorites__card`);
-    expect(screen.getByTestId(`card-1-image`)).toHaveClass(`favorites__image-wrapper`);
-    expect(screen.getByTestId(`card-1-info`)).toHaveClass(`favorites__card-info`);
-    expect(screen.getByTestId(`card-1-bookmark`)).toHaveClass(`place-card__bookmark-button--active`);
+    userEvent.unhover(screen.getByTestId(`card-1`));
+    expect(fakeDispatch).not.toBeCalled();
 
   });
 });
