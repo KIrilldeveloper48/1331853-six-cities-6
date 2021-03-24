@@ -28,7 +28,7 @@ describe(`Test 'Locations'`, () => {
 
   });
 
-  it(`When user click to the link should be call dispatch fn`, () => {
+  it(`Dispatch fn should be called on click (link)`, () => {
     const fakeDispatch = jest.spyOn(redux, `useDispatch`);
 
     render(
