@@ -25,6 +25,7 @@ describe(`Test 'Locations'`, () => {
       expect(screen.getByText(item)).toBeInTheDocument();
     }
     expect(screen.getByTestId(`locations-link-${testCity}`)).toHaveClass(`tabs__item--active`);
+    expect(screen.getByTestId(`locations-link-Amsterdam`)).not.toHaveClass(`tabs__item--active`);
 
   });
 
