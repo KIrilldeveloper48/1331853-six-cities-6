@@ -11,9 +11,9 @@ const mockStore = configureStore();
 
 const testData = {
   USER: {
-    authorizationStatus: `AUTH`,
-    userName: `Kirill`,
-    avatarUrl: `image/avatar.jpg`,
+    authorizationStatus: ``,
+    userName: ``,
+    avatarUrl: ``,
   }
 };
 
