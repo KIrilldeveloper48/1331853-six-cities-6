@@ -7,7 +7,6 @@ import Toast from './toast';
 
 const mockStore = configureStore();
 
-
 it(`Render 'Toast'`, () => {
 
   render(
@@ -18,5 +17,7 @@ it(`Render 'Toast'`, () => {
 
   expect(screen.getByTestId(`toast`)).toBeInTheDocument();
   expect(screen.getByText(`Error 404 try later`)).toBeInTheDocument();
-
+  setTimeout(() => {
+    expect(screen.getByText(`Error 404 try later`)).not.toBeInTheDocument();
+  }, 5000);
 });
