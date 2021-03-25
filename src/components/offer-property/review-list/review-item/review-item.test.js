@@ -4,13 +4,16 @@ import {render, screen} from '@testing-library/react';
 import ReviewItem from './review-item';
 
 const testReviewItem = {
-  id: 1,
-  user: {
-    avatarUrl: `image/avatar.jpg`
-  },
-  rating: 4,
-  comment: `it couldn't be worse`,
-  date: `2019-05-08T14:13:56.569Z`
+  "comment": `it couldn't be worse`,
+  "date": `2019-05-08T14:13:56.569Z`,
+  "id": 1,
+  "rating": 4,
+  "user": {
+    "avatarUrl": `image/avatar.jpg`,
+    "id": 4,
+    "isPro": false,
+    "name": ``
+  }
 };
 
 it(`Render 'ReviewItem'`, () => {
