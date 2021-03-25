@@ -5,22 +5,28 @@ import ReviewList from './review-list';
 
 const testReviewList = [
   {
-    id: 1,
-    user: {
-      avatarUrl: `image/avatar.jpg`
-    },
-    rating: 4,
-    comment: `it couldn't be worse`,
-    data: `2019-05-08T14:13:56.569Z`
+    "comment": ``,
+    "date": `2019-05-08T14:13:56.569Z`,
+    "id": 1,
+    "rating": 4,
+    "user": {
+      "avatarUrl": ``,
+      "id": 4,
+      "isPro": false,
+      "name": ``
+    }
   },
   {
-    id: 2,
-    user: {
-      avatarUrl: `image/avatar.jpg`
-    },
-    rating: 4,
-    comment: `it couldn't be worse`,
-    data: `2019-05-08T14:13:56.569Z`
+    "comment": ``,
+    "date": `2019-05-08T14:13:56.569Z`,
+    "id": 2,
+    "rating": 4,
+    "user": {
+      "avatarUrl": ``,
+      "id": 4,
+      "isPro": false,
+      "name": ``
+    }
   }
 ];
 
