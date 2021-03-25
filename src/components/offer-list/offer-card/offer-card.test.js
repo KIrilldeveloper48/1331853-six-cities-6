@@ -52,7 +52,7 @@ describe(`Test 'OfferCard'`, () => {
     render(
         <redux.Provider store={mockStore({})}>
           <Router history={history}>
-            <OfferCard {...testOffer} mode="MAIN"/>
+            <OfferCard {...testOffer} mode="MAIN" cardFavorCallback={() => {}} mouseLeaveCallback={() => {}} mouseOverCallback={() => {}}/>
           </Router>
         </redux.Provider>
     );
@@ -109,7 +109,7 @@ describe(`Test 'OfferCard'`, () => {
     render(
         <redux.Provider store={mockStore({})}>
           <Router history={history}>
-            <OfferCard {...testOffer} mode="OFFER"/>
+            <OfferCard {...testOffer} mode="OFFER" cardFavorCallback={() => {}} mouseLeaveCallback={() => {}} mouseOverCallback={() => {}}/>
           </Router>
         </redux.Provider>
     );
@@ -166,7 +166,7 @@ describe(`Test 'OfferCard'`, () => {
     render(
         <redux.Provider store={mockStore({})}>
           <Router history={history}>
-            <OfferCard {...testOffer} mode="FAVOR"/>
+            <OfferCard {...testOffer} mode="FAVOR" cardFavorCallback={() => {}} mouseLeaveCallback={() => {}} mouseOverCallback={() => {}}/>
           </Router>
         </redux.Provider>
     );
@@ -223,7 +223,7 @@ describe(`Test 'OfferCard'`, () => {
     render(
         <redux.Provider store={mockStore({})}>
           <Router history={history}>
-            <OfferCard {...testOffer} mode="MAIN"/>
+            <OfferCard {...testOffer} mode="MAIN" cardFavorCallback={() => {}} mouseLeaveCallback={() => {}} mouseOverCallback={() => {}}/>
           </Router>
         </redux.Provider>
     );
@@ -273,7 +273,7 @@ describe(`Test 'OfferCard'`, () => {
     render(
         <redux.Provider store={mockStore({})}>
           <Router history={history}>
-            <OfferCard {...testOffer} mode="MAIN"/>
+            <OfferCard {...testOffer} mode="MAIN" cardFavorCallback={() => {}} mouseLeaveCallback={() => {}} mouseOverCallback={() => {}}/>
           </Router>
         </redux.Provider>
     );
