@@ -7,52 +7,11 @@ import {Router} from 'react-router';
 
 import OfferCard from './offer-card';
 import userEvent from '@testing-library/user-event';
-import thunk from 'redux-thunk';
-import {createApi} from './../../../services/api';
-import MockAdapter from 'axios-mock-adapter';
 
-import {APIRoute} from '../../../const';
-import {toggleFavorOnServer} from '../../../store/api-actions';
-
-const middleware = [thunk];
-const mockStore = configureStore(
-    middleware
-);
+const mockStore = configureStore();
 
 const history = createMemoryHistory();
 
-const testOfferVer1 = {
-  id: 1,
-  previewImage: `img/1.png`,
-  price: 120,
-  type: `apartment`,
-  rating: 3,
-  isPremium: true,
-  title: `bad room`,
-  isFavorite: true
-};
-
-const testOfferVer2 = {
-  id: 1,
-  previewImage: `img/1.png`,
-  price: 120,
-  type: `apartment`,
-  rating: 3,
-  isPremium: false,
-  title: `bad room`,
-  isFavorite: false
-};
-
-const testOfferVer3 = {
-  id: 1,
-  previewImage: `img/1.png`,
-  price: 120,
-  type: `apartment`,
-  rating: 3,
-  isPremium: false,
-  title: `bad room`,
-  isFavorite: true
-};
 describe(`Test 'OfferCard'`, () => {
   it(`'OfferCard' should be render correctly on the main page`, () => {
     const testOffer = {
@@ -325,9 +284,7 @@ describe(`Test 'OfferCard'`, () => {
     expect(screen.getByTestId(`card-1-bookmark`)).toHaveClass(`place-card__bookmark-button--active`);
   });
 
-  it(`Logic should be worked correctly on the main page`, () => {
-    const api = createApi(() => { });
-    const apiMock = new MockAdapter(api);
+  it(`Logic should be worked correctly`, () => {
     const testOffer = {
       "bedrooms": 1,
       "city": {
@@ -362,16 +319,13 @@ describe(`Test 'OfferCard'`, () => {
       "title": ``,
       "type": ``
     };
-    const fakeDispatch = jest.spyOn(redux, `useDispatch`);
-
-    apiMock
-      .onGet(`${APIRoute.FAVOR}/${1}/${1}`)
-      .reply(200, [{}]);
+    jest.spyOn(redux, `useDispatch`).mockImplementation(() => jest.fn());
+    const fakeCallback = jest.fn();
 
     render(
         <redux.Provider store={mockStore({})}>
           <Router history={history}>
-            <OfferCard {...testOffer} mode="MAIN"/>
+            <OfferCard {...testOffer} mode="MAIN" cardFavorCallback={fakeCallback} mouseLeaveCallback={fakeCallback} mouseOverCallback={fakeCallback} />
           </Router>
         </redux.Provider>
     );
@@ -379,70 +333,16 @@ describe(`Test 'OfferCard'`, () => {
     expect(screen.getByTestId(`card-1`)).toBeInTheDocument();
 
     userEvent.hover(screen.getByTestId(`card-1`));
-    expect(fakeDispatch).toBeCalled();
+    expect(fakeCallback).toBeCalled();
 
     userEvent.unhover(screen.getByTestId(`card-1`));
-    expect(fakeDispatch).toBeCalled();
+    expect(fakeCallback).toBeCalled();
 
     userEvent.click(screen.getByTestId(`card-1-bookmark`));
-    expect(fakeDispatch);
+    expect(fakeCallback).toBeCalled();
 
   });
 
-  it(`Logic should be worked correctly on the offer page`, () => {
-    const testOffer = {
-      "bedrooms": 1,
-      "city": {
-        "location": {
-          "latitude": 1,
-          "longitude": 1,
-          "zoom": 1
-        },
-        "name": `Paris`
-      },
-      "description": ``,
-      "goods": [``, ``],
-      "host": {
-        "avatarUrl": ``,
-        "id": 1,
-        "isPro": false,
-        "name": ``
-      },
-      "id": 1,
-      "images": [``, ``],
-      "isFavorite": true,
-      "isPremium": true,
-      "location": {
-        "latitude": 1,
-        "longitude": 1,
-        "zoom": 1
-      },
-      "maxAdults": 1,
-      "previewImage": ``,
-      "price": 1,
-      "rating": 1,
-      "title": ``,
-      "type": ``
-    };
-    const fakeDispatch = jest.spyOn(redux, `useDispatch`);
-
-    render(
-        <redux.Provider store={mockStore({})}>
-          <Router history={history}>
-            <OfferCard {...testOffer} mode="OFFER"/>
-          </Router>
-        </redux.Provider>
-    );
-
-    expect(screen.getByTestId(`card-1`)).toBeInTheDocument();
-
-    userEvent.hover(screen.getByTestId(`card-1`));
-    expect(fakeDispatch).not.toBeCalled();
-
-    userEvent.unhover(screen.getByTestId(`card-1`));
-    expect(fakeDispatch).not.toBeCalled();
-
-  });
 });
 
 
