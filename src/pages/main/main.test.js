@@ -11,9 +11,9 @@ const mockStore = configureStore();
 
 const testDataWithFilledOfferList = {
   USER: {
-    authorizationStatus: `AUTH`,
-    userName: `Kirill`,
-    avatarUrl: `image/avatar.jpg`,
+    authorizationStatus: ``,
+    userName: ``,
+    avatarUrl: ``,
     errorMessage: ``
   },
   MAIN: {
@@ -26,67 +26,106 @@ const testDataWithFilledOfferList = {
     openedOffer: {},
     offers: [
       {
-        id: 1,
-        city: {
-          location: {
-            latitude: 52.370216,
-            longitude: 4.895168,
+        "bedrooms": 3,
+        "city": {
+          "location": {
+            "latitude": 1,
+            "longitude": 1,
+            "zoom": 1
           },
-          name: `Paris`
+          "name": `Paris`
         },
-        previewImage: `img/1.png`,
-        price: 120,
-        type: `apartment`,
-        rating: 3,
-        isPremium: true,
-        title: `bad room`,
-        isFavorite: true,
-        location: {
-          latitude: 52.35514938496378,
-          longitude: 4.673877537499948,
-        }
+        "description": ``,
+        "goods": [`1`, `2`],
+        "host": {
+          "avatarUrl": ``,
+          "id": 3,
+          "isPro": false,
+          "name": ``
+        },
+        "id": 1,
+        "images": [``, ``],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": {
+          "latitude": 1,
+          "longitude": 1,
+          "zoom": 1
+        },
+        "maxAdults": 1,
+        "previewImage": ``,
+        "price": 100,
+        "rating": 4,
+        "title": ``,
+        "type": ``
       },
       {
-        id: 2,
-        city: {
-          location: {
-            latitude: 52.370216,
-            longitude: 4.895168,
+        "bedrooms": 3,
+        "city": {
+          "location": {
+            "latitude": 1,
+            "longitude": 1,
+            "zoom": 1
           },
-          name: `Paris`
+          "name": `Paris`
         },
-        previewImage: `img/1.png`,
-        price: 120,
-        type: `apartment`,
-        rating: 3,
-        isPremium: true,
-        title: `bad room`,
-        isFavorite: true,
-        location: {
-          latitude: 52.35514938496378,
-          longitude: 4.673877537499948,
-        }
+        "description": ``,
+        "goods": [`1`, `2`],
+        "host": {
+          "avatarUrl": ``,
+          "id": 2,
+          "isPro": false,
+          "name": ``
+        },
+        "id": 2,
+        "images": [``, ``],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": {
+          "latitude": 1,
+          "longitude": 1,
+          "zoom": 1
+        },
+        "maxAdults": 1,
+        "previewImage": ``,
+        "price": 100,
+        "rating": 4,
+        "title": ``,
+        "type": ``
       },
       {
-        id: 3,
-        city: {
-          location: {
-            latitude: 52.370216,
-            longitude: 4.895168,
+        "bedrooms": 3,
+        "city": {
+          "location": {
+            "latitude": 1,
+            "longitude": 1,
+            "zoom": 1
           },
-          name: `Amsterdam`
+          "name": `Amsterdam`
         },
-        previewImage: `img/1.png`,
-        price: 120,
-        type: `apartment`,
-        rating: 3,
-        isPremium: true,
-        title: `bad room`,
-        isFavorite: true,
-        location: {
-          latitude: 52.35514938496378,
-          longitude: 4.673877537499948,
-        }
+        "description": ``,
+        "goods": [`1`, `2`],
+        "host": {
+          "avatarUrl": ``,
+          "id": 3,
+          "isPro": false,
+          "name": ``
+        },
+        "id": 3,
+        "images": [``, ``],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": {
+          "latitude": 1,
+          "longitude": 1,
+          "zoom": 1
+        },
+        "maxAdults": 1,
+        "previewImage": ``,
+        "price": 100,
+        "rating": 4,
+        "title": ``,
+        "type": ``
       }
     ]
   }
@@ -94,9 +133,9 @@ const testDataWithFilledOfferList = {
 
 const testDataWithEmptyOfferList = {
   USER: {
-    authorizationStatus: `AUTH`,
-    userName: `Kirill`,
-    avatarUrl: `image/avatar.jpg`,
+    authorizationStatus: ``,
+    userName: ``,
+    avatarUrl: ``,
     errorMessage: ``
   },
   MAIN: {
@@ -149,6 +188,9 @@ describe(`Should render main page correctly with filled and empty offer list`, (
           </Router>
         </redux.Provider>
     );
+    expect(screen.getByTestId(`toast`)).toBeInTheDocument();
+    expect(screen.getByTestId(`header`)).toBeInTheDocument();
+    expect(screen.getByTestId(`locations`)).toBeInTheDocument();
 
     expect(screen.getByTestId(`main-page-empty`)).toBeInTheDocument();
 
