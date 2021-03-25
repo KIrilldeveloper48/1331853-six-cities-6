@@ -6,31 +6,14 @@ import {offersPropValid} from './offer-card.prop';
 
 import {getOfferPath, getRatingCount} from '../../../utils';
 import {CARD_CLASS_NAME} from '../../../const';
-import {removeActiveOffer, setActiveOffer} from '../../../store/action';
-import {useDispatch} from 'react-redux';
-import {toggleFavorOnServer} from '../../../store/api-actions';
 
-const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isFavorite, mode}) => {
-  const dispatch = useDispatch();
+const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isFavorite, mode, cardFavorCallback, mouseLeaveCallback, mouseOverCallback}) => {
   const isCardPremium = isPremium && <div className="place-card__mark"><span>Premium</span></div>;
   const isCardFavorite = isFavorite ? `place-card__bookmark-button--active` : ``;
 
-  const cardMouseOverHandler = (cardId) => {
-    if (mode !== `OFFER`) {
-      dispatch(setActiveOffer(cardId));
-    }
-  };
-
-  const cardMouseLeaveHandler = () => {
-    if (mode !== `OFFER`) {
-      dispatch(removeActiveOffer());
-    }
-  };
-
-  const cardFavorClickHandler = (cardId, status) => {
-    const newStatus = Number(!status);
-    dispatch(toggleFavorOnServer(cardId, newStatus));
-  };
+  const cardFavorClickHandler = cardFavorCallback;
+  const cardMouseLeaveHandler = mouseLeaveCallback;
+  const cardMouseOverHandler = mouseOverCallback;
 
   return (
     <article className={`${CARD_CLASS_NAME[mode].article} place-card`} onMouseOver={() => cardMouseOverHandler(id)} onMouseLeave={() => cardMouseLeaveHandler()} data-testid={`card-${id}`}>
@@ -72,6 +55,9 @@ const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isF
 OfferCard.propTypes = {
   ...offersPropValid,
   mode: PropTypes.string.isRequired,
+  cardFavorCallback: PropTypes.func.isRequired,
+  mouseLeaveCallback: PropTypes.func.isRequired,
+  mouseOverCallback: PropTypes.func.isRequired
 };
 
 
