@@ -15,7 +15,7 @@ it(`Render 'Login' when user navigate to '/login' url`, () => {
   history.push(`/login`);
 
   render(
-      <redux.Provider store={mockStore({MAIN: {city: `Paris`}, USER: {authorizationStatus: `NO_AUTH`, userName: `Kirill`, avatarUrl: `src/image`}})}>
+      <redux.Provider store={mockStore({MAIN: {city: ``}, USER: {authorizationStatus: `NO_AUTH`, userName: ``, avatarUrl: ``}})}>
         <Router history={history}>
           <Login />
         </Router>
