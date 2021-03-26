@@ -22,252 +22,177 @@ const testDataVer1 = {
   },
   DATA: {
     openedOffer: {
-      "id": 3,
-      "images": [``, ``],
-      "isPremium": true,
-      "isFavorite": true,
-      "title": `Beautiful palace`,
-      "rating": 4,
-      "type": `apartment`,
       "bedrooms": 4,
-      "maxAdults": 4,
-      "price": 140,
-      "goods": [``, ``],
-      "host": {
-        avatarUrl: `image/avatar.jpg`,
-        name: `Kirill`,
-        isPro: true
-      },
-      "description": `Hi hi ha ha`,
       "city": {
         "location": {
           "latitude": 1,
           "longitude": 1,
+          "zoom": 1
         },
+        "name": `Amsterdam`
       },
-      "location": {
-        "latitude": 1,
-        "longitude": 1,
-      },
-    },
-    currentReviews: [
-      {
-        id: 1,
-        user: {
-          avatarUrl: ``
-        },
-        rating: 4,
-        comment: ``,
-        data: `2019-05-08T14:13:56.569Z`
-      },
-      {
-        id: 2,
-        user: {
-          avatarUrl: ``
-        },
-        rating: 4,
-        comment: ``,
-        data: `2019-05-08T14:13:56.569Z`
-      }
-    ],
-    nearbyOffers: [
-      {
-        "id": 1,
-        "previewImage": ``,
-        "price": 120,
-        "type": ``,
-        "rating": 3,
-        "isPremium": true,
-        "title": ``,
-        "isFavorite": true,
-        "city": {
-          "location": {
-            "latitude": 1,
-            "longitude": 1,
-          },
-        },
-        "location": {
-          "latitude": 1,
-          "longitude": 1,
-        },
-      },
-      {
-        "id": 2,
-        "previewImage": ``,
-        "price": 120,
-        "type": ``,
-        "rating": 3,
-        "isPremium": true,
-        "title": ``,
-        "isFavorite": true,
-        "city": {
-          "location": {
-            "latitude": 1,
-            "longitude": 1,
-          },
-        },
-        "location": {
-          "latitude": 1,
-          "longitude": 1,
-        },
-      },
-      {
-        "id": 3,
-        "previewImage": ``,
-        "price": 120,
-        "type": ``,
-        "rating": 3,
-        "isPremium": true,
-        "title": ``,
-        "isFavorite": true,
-        "city": {
-          "location": {
-            "latitude": 1,
-            "longitude": 1,
-          },
-        },
-        "location": {
-          "latitude": 1,
-          "longitude": 1,
-        },
-      }
-    ]
-  }
-};
-
-const testDataVer2 = {
-  USER: {
-    authorizationStatus: ``,
-    userName: ``,
-    avatarUrl: ``,
-    errorMessage: ``
-  },
-  MAIN: {
-    city: `Paris`,
-    activeOffer: false,
-  },
-  DATA: {
-    openedOffer: {
-      "id": 3,
-      "images": [``, ``],
-      "isPremium": false,
-      "isFavorite": false,
-      "title": `Beautiful palace`,
-      "rating": 4,
-      "type": `apartment`,
-      "bedrooms": 4,
-      "maxAdults": 4,
-      "price": 140,
+      "description": `Hi hi ha ha`,
       "goods": [`1`, `2`],
       "host": {
-        avatarUrl: `image/avatar.jpg`,
-        name: `Kirill`,
-        isPro: false
+        "avatarUrl": `image/avatar.jpg`,
+        "id": 3,
+        "isPro": true,
+        "name": `Kirill`
       },
-      "description": `Hi hi ha ha`,
-      "city": {
-        "location": {
-          "latitude": 1,
-          "longitude": 1,
-        },
-      },
+      "id": 3,
+      "images": [``, ``],
+      "isFavorite": true,
+      "isPremium": true,
       "location": {
         "latitude": 1,
         "longitude": 1,
+        "zoom": 1
       },
+      "maxAdults": 4,
+      "previewImage": ``,
+      "price": 140,
+      "rating": 4,
+      "title": `Beautiful palace`,
+      "type": `apartment`
     },
     currentReviews: [
       {
-        id: 1,
-        user: {
-          avatarUrl: ``
-        },
-        rating: 4,
-        comment: ``,
-        date: `2019-05-08T14:13:56.569Z`
+        "comment": ``,
+        "date": `2019-05-08T14:13:56.569Z`,
+        "id": 1,
+        "rating": 4,
+        "user": {
+          "avatarUrl": ``,
+          "id": 4,
+          "isPro": false,
+          "name": ``
+        }
       },
       {
-        id: 2,
-        user: {
-          avatarUrl: ``
-        },
-        rating: 4,
-        comment: ``,
-        date: `2019-05-08T14:13:56.569Z`
+        "comment": ``,
+        "date": `2019-05-08T14:13:56.569Z`,
+        "id": 2,
+        "rating": 4,
+        "user": {
+          "avatarUrl": ``,
+          "id": 4,
+          "isPro": false,
+          "name": ``
+        }
       }
     ],
     nearbyOffers: [
       {
+        "bedrooms": 3,
+        "city": {
+          "location": {
+            "latitude": 1,
+            "longitude": 1,
+            "zoom": 1
+          },
+          "name": `Paris`
+        },
+        "description": ``,
+        "goods": [`1`, `2`],
+        "host": {
+          "avatarUrl": ``,
+          "id": 3,
+          "isPro": false,
+          "name": ``
+        },
         "id": 1,
+        "images": [``, ``],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": {
+          "latitude": 1,
+          "longitude": 1,
+          "zoom": 1
+        },
+        "maxAdults": 1,
         "previewImage": ``,
-        "price": 120,
-        "type": ``,
-        "rating": 3,
-        "isPremium": true,
+        "price": 100,
+        "rating": 4,
         "title": ``,
-        "bedrooms": 4,
-        "isFavorite": true,
+        "type": ``
+      },
+      {
+        "bedrooms": 3,
         "city": {
           "location": {
             "latitude": 1,
             "longitude": 1,
+            "zoom": 1
           },
+          "name": `Paris`
         },
-        "location": {
-          "latitude": 1,
-          "longitude": 1,
+        "description": ``,
+        "goods": [`1`, `2`],
+        "host": {
+          "avatarUrl": ``,
+          "id": 2,
+          "isPro": false,
+          "name": ``
         },
-      },
-      {
         "id": 2,
-        "previewImage": ``,
-        "price": 120,
-        "type": ``,
-        "rating": 3,
-        "bedrooms": 4,
-        "isPremium": true,
-        "title": ``,
-        "isFavorite": true,
-        "city": {
-          "location": {
-            "latitude": 1,
-            "longitude": 1,
-          },
-        },
+        "images": [``, ``],
+        "isFavorite": false,
+        "isPremium": false,
         "location": {
           "latitude": 1,
           "longitude": 1,
+          "zoom": 1
         },
+        "maxAdults": 1,
+        "previewImage": ``,
+        "price": 100,
+        "rating": 4,
+        "title": ``,
+        "type": ``
       },
       {
-        "id": 3,
-        "previewImage": ``,
-        "price": 120,
-        "type": ``,
-        "rating": 3,
-        "bedrooms": 4,
-        "isPremium": true,
-        "title": ``,
-        "isFavorite": true,
+        "bedrooms": 3,
         "city": {
           "location": {
             "latitude": 1,
             "longitude": 1,
+            "zoom": 1
           },
+          "name": `Amsterdam`
         },
+        "description": ``,
+        "goods": [`1`, `2`],
+        "host": {
+          "avatarUrl": ``,
+          "id": 3,
+          "isPro": false,
+          "name": ``
+        },
+        "id": 3,
+        "images": [``, ``],
+        "isFavorite": false,
+        "isPremium": false,
         "location": {
           "latitude": 1,
           "longitude": 1,
+          "zoom": 1
         },
+        "maxAdults": 1,
+        "previewImage": ``,
+        "price": 100,
+        "rating": 4,
+        "title": ``,
+        "type": ``
       }
     ]
   }
 };
 
-describe(`Should render 'OfferProperty' page correctly with different parameters`, () => {
+
+describe(`Test 'OfferProperty'`, () => {
   jest.spyOn(redux, `useSelector`);
   jest.spyOn(redux, `useDispatch`);
-  it(`Render 'OfferProperty' when parameters 'isFavorite', 'isPremium' and 'isPro' is true`, () => {
+  it(`OfferProperty' should render correctly`, () => {
     const history = createMemoryHistory();
     history.push(`/offer/3`);
 
@@ -283,14 +208,13 @@ describe(`Should render 'OfferProperty' page correctly with different parameters
     expect(screen.getByTestId(`toast`)).toBeInTheDocument();
     expect(screen.getByTestId(`header`)).toBeInTheDocument();
     expect(screen.getByTestId(`gallery`)).toBeInTheDocument();
-    expect(screen.getByTestId(`property-wrapper`)).toContainElement(screen.getByTestId(`property-mark`));
-    expect(screen.getByTestId(`offer-property-bookmark`)).toHaveClass(`property__bookmark-button--active`);
+    expect(screen.getByTestId(`offer-property-bookmark`)).toBeInTheDocument();
+
     expect(screen.getByTestId(`map`)).toBeInTheDocument();
     expect(screen.getByTestId(`inside-list`)).toBeInTheDocument();
     expect(screen.getByTestId(`offer-property-user-avatar`)).toHaveAttribute(`src`, `image/avatar.jpg`);
     expect(screen.getByTestId(`offer-property-type`)).toContainHTML(`apartment`);
     expect(screen.getByTestId(`offer-property-user-name`)).toContainHTML(`Kirill`);
-    expect(screen.getByTestId(`offer-property-user`)).toContainElement(screen.getByTestId(`offer-property-user-pro`));
     expect(screen.getByTestId(`card-1`)).toBeInTheDocument();
     expect(screen.getByTestId(`card-2`)).toBeInTheDocument();
     expect(screen.getByTestId(`card-3`)).toBeInTheDocument();
@@ -307,13 +231,208 @@ describe(`Should render 'OfferProperty' page correctly with different parameters
     expect(screen.getByText(`Hi hi ha ha`)).toBeInTheDocument();
     expect(screen.getByText(`Reviews ·`)).toBeInTheDocument();
     expect(screen.getByText(`Other places in the neighbourhood`)).toBeInTheDocument();
+  });
 
+  it(`Render 'OfferProperty' when parameters 'isFavorite', 'isPremium' and 'isPro' is true`, () => {
+    const history = createMemoryHistory();
+    history.push(`/offer/3`);
 
+    render(
+        <redux.Provider store={mockStore(testDataVer1)}>
+          <Router history={history}>
+            <App />
+          </Router>
+        </redux.Provider>
+    );
+
+    expect(screen.getByTestId(`offer-property`)).toBeInTheDocument();
+
+    expect(screen.getByTestId(`property-wrapper`)).toContainElement(screen.getByTestId(`property-mark`));
+    expect(screen.getByTestId(`offer-property-user`)).toContainElement(screen.getByTestId(`offer-property-user-pro`));
   });
 
   it(`Render 'OfferProperty' when parameters 'isFavorite', 'isPremium' and 'isPro' is false`, () => {
     const history = createMemoryHistory();
     history.push(`/offer/3`);
+
+    const testDataVer2 = {
+      USER: {
+        authorizationStatus: ``,
+        userName: ``,
+        avatarUrl: ``,
+        errorMessage: ``
+      },
+      MAIN: {
+        city: `Paris`,
+        activeOffer: false,
+      },
+      DATA: {
+        openedOffer: {
+          "bedrooms": 4,
+          "city": {
+            "location": {
+              "latitude": 1,
+              "longitude": 1,
+              "zoom": 1
+            },
+            "name": `Amsterdam`
+          },
+          "description": `Hi hi ha ha`,
+          "goods": [`1`, `2`],
+          "host": {
+            "avatarUrl": `image/avatar.jpg`,
+            "id": 3,
+            "isPro": false,
+            "name": `Kirill`
+          },
+          "id": 3,
+          "images": [``, ``],
+          "isFavorite": false,
+          "isPremium": false,
+          "location": {
+            "latitude": 1,
+            "longitude": 1,
+            "zoom": 1
+          },
+          "maxAdults": 4,
+          "previewImage": ``,
+          "price": 140,
+          "rating": 4,
+          "title": `Beautiful palace`,
+          "type": `apartment`
+        },
+        currentReviews: [
+          {
+            "comment": ``,
+            "date": `2019-05-08T14:13:56.569Z`,
+            "id": 1,
+            "rating": 4,
+            "user": {
+              "avatarUrl": ``,
+              "id": 4,
+              "isPro": false,
+              "name": ``
+            }
+          },
+          {
+            "comment": ``,
+            "date": `2019-05-08T14:13:56.569Z`,
+            "id": 2,
+            "rating": 4,
+            "user": {
+              "avatarUrl": ``,
+              "id": 4,
+              "isPro": false,
+              "name": ``
+            }
+          }
+        ],
+        nearbyOffers: [
+          {
+            "bedrooms": 3,
+            "city": {
+              "location": {
+                "latitude": 1,
+                "longitude": 1,
+                "zoom": 1
+              },
+              "name": `Paris`
+            },
+            "description": ``,
+            "goods": [`1`, `2`],
+            "host": {
+              "avatarUrl": ``,
+              "id": 3,
+              "isPro": false,
+              "name": ``
+            },
+            "id": 1,
+            "images": [``, ``],
+            "isFavorite": false,
+            "isPremium": false,
+            "location": {
+              "latitude": 1,
+              "longitude": 1,
+              "zoom": 1
+            },
+            "maxAdults": 1,
+            "previewImage": ``,
+            "price": 100,
+            "rating": 4,
+            "title": ``,
+            "type": ``
+          },
+          {
+            "bedrooms": 3,
+            "city": {
+              "location": {
+                "latitude": 1,
+                "longitude": 1,
+                "zoom": 1
+              },
+              "name": `Paris`
+            },
+            "description": ``,
+            "goods": [`1`, `2`],
+            "host": {
+              "avatarUrl": ``,
+              "id": 2,
+              "isPro": false,
+              "name": ``
+            },
+            "id": 2,
+            "images": [``, ``],
+            "isFavorite": false,
+            "isPremium": false,
+            "location": {
+              "latitude": 1,
+              "longitude": 1,
+              "zoom": 1
+            },
+            "maxAdults": 1,
+            "previewImage": ``,
+            "price": 100,
+            "rating": 4,
+            "title": ``,
+            "type": ``
+          },
+          {
+            "bedrooms": 3,
+            "city": {
+              "location": {
+                "latitude": 1,
+                "longitude": 1,
+                "zoom": 1
+              },
+              "name": `Amsterdam`
+            },
+            "description": ``,
+            "goods": [`1`, `2`],
+            "host": {
+              "avatarUrl": ``,
+              "id": 3,
+              "isPro": false,
+              "name": ``
+            },
+            "id": 3,
+            "images": [``, ``],
+            "isFavorite": false,
+            "isPremium": false,
+            "location": {
+              "latitude": 1,
+              "longitude": 1,
+              "zoom": 1
+            },
+            "maxAdults": 1,
+            "previewImage": ``,
+            "price": 100,
+            "rating": 4,
+            "title": ``,
+            "type": ``
+          }
+        ]
+      }
+    };
 
     render(
         <redux.Provider store={mockStore(testDataVer2)}>
@@ -325,7 +444,6 @@ describe(`Should render 'OfferProperty' page correctly with different parameters
 
     expect(screen.getByTestId(`offer-property`)).toBeInTheDocument();
     expect(screen.getByTestId(`property-wrapper`)).not.toContainHTML(`<div className="property__mark" data-testid="property-mark"></div>`);
-    expect(screen.getByTestId(`offer-property-bookmark`)).not.toHaveClass(`property__bookmark-button--active`);
     expect(screen.getByTestId(`offer-property-user`)).not.toContainHTML(`<span className="property__user-status" data-testid="offer-property-user-pro">Pro</span>`);
   });
 });
