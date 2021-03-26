@@ -13,7 +13,7 @@ it(`Render 'Page 404'`, () => {
   const history = createMemoryHistory();
 
   render(
-      <redux.Provider store={mockStore({USER: {authorizationStatus: `AUTH`, userName: `Kirill`, avatarUrl: `src/image`}})}>
+      <redux.Provider store={mockStore({USER: {authorizationStatus: ``, userName: ``, avatarUrl: ``}})}>
         <Router history={history}>
           <Page404 />
         </Router>
