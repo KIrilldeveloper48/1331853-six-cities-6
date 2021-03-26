@@ -16,6 +16,7 @@ import {getRatingCount} from '../../utils';
 import {AuthorizationStatus} from '../../const';
 import {fetchOpenedOfferData, toggleFavorOnServer} from '../../store/api-actions';
 import {toggleOpenedCardFavor} from '../../store/action';
+import Bookmark from '../../components/offer-property/bookmark/bookmark';
 
 
 const OfferProperty = () => {
@@ -44,7 +45,6 @@ const OfferProperty = () => {
   const {id, images, isPremium, isFavorite, title, rating, type, bedrooms, maxAdults, price, goods, host: {avatarUrl, name, isPro}, description} = openedOffer;
   const isOfferPremium = isPremium && <div className="property__mark" data-testid="property-mark"><span>Premium</span></div>;
   const isUserPro = isPro && <span className="property__user-status" data-testid="offer-property-user-pro">Pro</span>;
-  const isCardFavorite = isFavorite ? `property__bookmark-button--active` : ``;
 
   const cardFavorClickHandler = (cardId, status) => {
     const newStatus = status ? 0 : 1;
@@ -67,12 +67,8 @@ const OfferProperty = () => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isCardFavorite} button`} type="button" onClick={()=> cardFavorClickHandler(id, isFavorite)} data-testid="offer-property-bookmark">
-                  <svg className="property__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <Bookmark cardFavorCallback={cardFavorClickHandler} isFavorite={isFavorite} id={id}/>
+
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
