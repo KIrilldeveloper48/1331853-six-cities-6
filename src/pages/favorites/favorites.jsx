@@ -1,15 +1,12 @@
 import React, {useEffect} from 'react';
 
-import LocationBtn from '../../components/common/location-btn';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import OfferList from '../../components/offer-list/offer-list';
 import Loading from '../../components/loading/loading';
 import Toast from '../../components/toast/toast';
 import FavoritesEmpty from './empty/empty';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {getCurrentOffers} from '../../utils';
 import {changeCity} from '../../store/action';
 import {fetchFavoriteList} from './../../store/api-actions';
 import FavoriteItem from '../../components/favorites/favorite-item/favorite-item';
