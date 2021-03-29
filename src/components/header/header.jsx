@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Routes} from '../../const';
-import IsLogined from './is-logined/is-logined';
+import SignIn from './sign-in/sign-in';
 
 const Header = () => {
   return (
@@ -16,7 +16,7 @@ const Header = () => {
           <nav className="header__nav" data-testid="header-nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <IsLogined />
+                <SignIn />
               </li>
             </ul>
           </nav>

@@ -21,5 +21,5 @@ it(`Render 'Header'`, () => {
 
   expect(screen.getByTestId(`header-logo`)).toBeInTheDocument();
   expect(screen.getByTestId(`header-nav`)).toBeInTheDocument();
-  expect(screen.getByTestId(`is-logined`)).toBeInTheDocument();
+  expect(screen.getByTestId(`sign-in`)).toBeInTheDocument();
 });
