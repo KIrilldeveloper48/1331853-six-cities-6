@@ -35,76 +35,10 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator for loading offers returns correct action`, () => {
     const expectedAction = {
       type: ActionType.LOAD_OFFERS,
-      payload: [{
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
-          },
-          "name": `Amsterdam`
-        },
-        "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-        "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-        "host": {
-          "avatar_url": `img/1.png`,
-          "id": 3,
-          "is_pro": true,
-          "name": `Angelina`
-        },
-        "id": 1,
-        "images": [`img/1.png`, `img/2.png`],
-        "is_favorite": false,
-        "is_premium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
-        },
-        "max_adults": 4,
-        "preview_image": `img/1.png`,
-        "price": 120,
-        "rating": 4.8,
-        "title": `Beautiful & luxurious studio at great location`,
-        "type": `apartment`
-      }]
+      payload: [{offer: 1}, {offer: 2}, {offer: 3}]
     };
 
-    expect(loadOffers([{
-      "bedrooms": 3,
-      "city": {
-        "location": {
-          "latitude": 52.370216,
-          "longitude": 4.895168,
-          "zoom": 10
-        },
-        "name": `Amsterdam`
-      },
-      "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-      "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-      "host": {
-        "avatar_url": `img/1.png`,
-        "id": 3,
-        "is_pro": true,
-        "name": `Angelina`
-      },
-      "id": 1,
-      "images": [`img/1.png`, `img/2.png`],
-      "is_favorite": false,
-      "is_premium": false,
-      "location": {
-        "latitude": 52.35514938496378,
-        "longitude": 4.673877537499948,
-        "zoom": 8
-      },
-      "max_adults": 4,
-      "preview_image": `img/1.png`,
-      "price": 120,
-      "rating": 4.8,
-      "title": `Beautiful & luxurious studio at great location`,
-      "type": `apartment`
-    }])).toEqual(expectedAction);
+    expect(loadOffers([{offer: 1}, {offer: 2}, {offer: 3}])).toEqual(expectedAction);
   });
 
   it(`Action creator for toggling favorite returns correct action`, () => {
@@ -125,179 +59,25 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator for setting open offer returns correct action`, () => {
     const expectedAction = {
       type: ActionType.SET_OPEN_OFFER,
-      payload: {
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
-          },
-          "name": `Amsterdam`
-        },
-        "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-        "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-        "host": {
-          "avatar_url": `img/1.png`,
-          "id": 3,
-          "is_pro": true,
-          "name": `Angelina`
-        },
-        "id": 1,
-        "images": [`img/1.png`, `img/2.png`],
-        "is_favorite": false,
-        "is_premium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
-        },
-        "max_adults": 4,
-        "preview_image": `img/1.png`,
-        "price": 120,
-        "rating": 4.8,
-        "title": `Beautiful & luxurious studio at great location`,
-        "type": `apartment`
-      }
+      payload: {openedOffer: 1}
     };
-    expect(setOpenOffer({
-      "bedrooms": 3,
-      "city": {
-        "location": {
-          "latitude": 52.370216,
-          "longitude": 4.895168,
-          "zoom": 10
-        },
-        "name": `Amsterdam`
-      },
-      "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-      "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-      "host": {
-        "avatar_url": `img/1.png`,
-        "id": 3,
-        "is_pro": true,
-        "name": `Angelina`
-      },
-      "id": 1,
-      "images": [`img/1.png`, `img/2.png`],
-      "is_favorite": false,
-      "is_premium": false,
-      "location": {
-        "latitude": 52.35514938496378,
-        "longitude": 4.673877537499948,
-        "zoom": 8
-      },
-      "max_adults": 4,
-      "preview_image": `img/1.png`,
-      "price": 120,
-      "rating": 4.8,
-      "title": `Beautiful & luxurious studio at great location`,
-      "type": `apartment`
-    })).toEqual(expectedAction);
+    expect(setOpenOffer({openedOffer: 1})).toEqual(expectedAction);
   });
 
   it(`Action creator for setting nearby offers returns correct action`, () => {
     const expectedAction = {
       type: ActionType.SET_NEARBY_OFFERS,
-      payload: [{
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
-          },
-          "name": `Amsterdam`
-        },
-        "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-        "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-        "host": {
-          "avatar_url": `img/1.png`,
-          "id": 3,
-          "is_pro": true,
-          "name": `Angelina`
-        },
-        "id": 1,
-        "images": [`img/1.png`, `img/2.png`],
-        "is_favorite": false,
-        "is_premium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
-        },
-        "max_adults": 4,
-        "preview_image": `img/1.png`,
-        "price": 120,
-        "rating": 4.8,
-        "title": `Beautiful & luxurious studio at great location`,
-        "type": `apartment`
-      }]
+      payload: [{offer: 1}, {offer: 2}, {offer: 3}]
     };
-    expect(setNearbyOffers([{
-      "bedrooms": 3,
-      "city": {
-        "location": {
-          "latitude": 52.370216,
-          "longitude": 4.895168,
-          "zoom": 10
-        },
-        "name": `Amsterdam`
-      },
-      "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-      "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-      "host": {
-        "avatar_url": `img/1.png`,
-        "id": 3,
-        "is_pro": true,
-        "name": `Angelina`
-      },
-      "id": 1,
-      "images": [`img/1.png`, `img/2.png`],
-      "is_favorite": false,
-      "is_premium": false,
-      "location": {
-        "latitude": 52.35514938496378,
-        "longitude": 4.673877537499948,
-        "zoom": 8
-      },
-      "max_adults": 4,
-      "preview_image": `img/1.png`,
-      "price": 120,
-      "rating": 4.8,
-      "title": `Beautiful & luxurious studio at great location`,
-      "type": `apartment`
-    }])).toEqual(expectedAction);
+    expect(setNearbyOffers([{offer: 1}, {offer: 2}, {offer: 3}])).toEqual(expectedAction);
   });
 
   it(`Action creator for setting current reviews returns correct action`, () => {
     const expectedAction = {
       type: ActionType.SET_CURRENT_REVIEWS,
-      payload: [{
-        "comment": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-        "date": `2019-05-08T14:13:56.569Z`,
-        "id": 1,
-        "rating": 4,
-        "user": {
-          "avatar_url": `img/1.png`,
-          "id": 4,
-          "is_pro": false,
-          "name": `Max`
-        }
-      }]
+      payload: [{review: 1}, {review: 2}, {review: 3}]
     };
-    expect(setCurrentReviews([{
-      "comment": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-      "date": `2019-05-08T14:13:56.569Z`,
-      "id": 1,
-      "rating": 4,
-      "user": {
-        "avatar_url": `img/1.png`,
-        "id": 4,
-        "is_pro": false,
-        "name": `Max`
-      }
-    }])).toEqual(expectedAction);
+    expect(setCurrentReviews([{review: 1}, {review: 2}, {review: 3}])).toEqual(expectedAction);
   });
 
   it(`Action creator for updating review loading status returns correct action`, () => {
@@ -311,149 +91,17 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator for setting favorite list status returns correct action`, () => {
     const expectedAction = {
       type: ActionType.SET_FAVORITE_LIST,
-      payload: [{
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
-          },
-          "name": `Amsterdam`
-        },
-        "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-        "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-        "host": {
-          "avatar_url": `img/1.png`,
-          "id": 3,
-          "is_pro": true,
-          "name": `Angelina`
-        },
-        "id": 1,
-        "images": [`img/1.png`, `img/2.png`],
-        "is_favorite": false,
-        "is_premium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
-        },
-        "max_adults": 4,
-        "preview_image": `img/1.png`,
-        "price": 120,
-        "rating": 4.8,
-        "title": `Beautiful & luxurious studio at great location`,
-        "type": `apartment`
-      }]
+      payload: [{offer: 1}, {offer: 2}, {offer: 3}]
     };
-    expect(setFavoriteList([{
-      "bedrooms": 3,
-      "city": {
-        "location": {
-          "latitude": 52.370216,
-          "longitude": 4.895168,
-          "zoom": 10
-        },
-        "name": `Amsterdam`
-      },
-      "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-      "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-      "host": {
-        "avatar_url": `img/1.png`,
-        "id": 3,
-        "is_pro": true,
-        "name": `Angelina`
-      },
-      "id": 1,
-      "images": [`img/1.png`, `img/2.png`],
-      "is_favorite": false,
-      "is_premium": false,
-      "location": {
-        "latitude": 52.35514938496378,
-        "longitude": 4.673877537499948,
-        "zoom": 8
-      },
-      "max_adults": 4,
-      "preview_image": `img/1.png`,
-      "price": 120,
-      "rating": 4.8,
-      "title": `Beautiful & luxurious studio at great location`,
-      "type": `apartment`
-    }])).toEqual(expectedAction);
+    expect(setFavoriteList([{offer: 1}, {offer: 2}, {offer: 3}])).toEqual(expectedAction);
   });
 
   it(`Action creator for adding card to favorite list status returns correct action`, () => {
     const expectedAction = {
       type: ActionType.ADD_CARD_TO_FAVORITE_LIST,
-      payload: {
-        "bedrooms": 3,
-        "city": {
-          "location": {
-            "latitude": 52.370216,
-            "longitude": 4.895168,
-            "zoom": 10
-          },
-          "name": `Amsterdam`
-        },
-        "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-        "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-        "host": {
-          "avatar_url": `img/1.png`,
-          "id": 3,
-          "is_pro": true,
-          "name": `Angelina`
-        },
-        "id": 1,
-        "images": [`img/1.png`, `img/2.png`],
-        "is_favorite": false,
-        "is_premium": false,
-        "location": {
-          "latitude": 52.35514938496378,
-          "longitude": 4.673877537499948,
-          "zoom": 8
-        },
-        "max_adults": 4,
-        "preview_image": `img/1.png`,
-        "price": 120,
-        "rating": 4.8,
-        "title": `Beautiful & luxurious studio at great location`,
-        "type": `apartment`
-      }
+      payload: {card: 1}
     };
-    expect(addCardToFavoriteList({
-      "bedrooms": 3,
-      "city": {
-        "location": {
-          "latitude": 52.370216,
-          "longitude": 4.895168,
-          "zoom": 10
-        },
-        "name": `Amsterdam`
-      },
-      "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-      "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-      "host": {
-        "avatar_url": `img/1.png`,
-        "id": 3,
-        "is_pro": true,
-        "name": `Angelina`
-      },
-      "id": 1,
-      "images": [`img/1.png`, `img/2.png`],
-      "is_favorite": false,
-      "is_premium": false,
-      "location": {
-        "latitude": 52.35514938496378,
-        "longitude": 4.673877537499948,
-        "zoom": 8
-      },
-      "max_adults": 4,
-      "preview_image": `img/1.png`,
-      "price": 120,
-      "rating": 4.8,
-      "title": `Beautiful & luxurious studio at great location`,
-      "type": `apartment`
-    })).toEqual(expectedAction);
+    expect(addCardToFavoriteList({card: 1})).toEqual(expectedAction);
   });
 
   it(`Action creator for removing card from favorite list returns correct action`, () => {
