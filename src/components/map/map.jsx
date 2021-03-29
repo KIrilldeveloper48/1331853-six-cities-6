@@ -9,7 +9,6 @@ import {MAP_CLASS_NAME} from '../../const';
 import {useSelector} from 'react-redux';
 
 const Map = ({offers, mode, city}) => {
-
   if (!offers.length) {
     return ``;
   }
@@ -37,7 +36,7 @@ const Map = ({offers, mode, city}) => {
       mapRef.current.remove();
     };
 
-  }, [city]);
+  }, [cityLocation]);
 
   useEffect(() => {
     const markers = [];
