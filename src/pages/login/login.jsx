@@ -2,6 +2,7 @@ import React, {useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import LocationBtn from '../../components/common/location-btn';
 import Header from '../../components/header/header';
+import Toast from '../../components/toast/toast';
 import {login} from '../../store/api-actions';
 
 const Login = () => {
@@ -22,6 +23,7 @@ const Login = () => {
   return (
     <>
       <div className="page page--gray page--login">
+        <Toast />
         <Header />
         <main className="page__main page__main--login">
           <div className="page__login-container container">
