@@ -73,7 +73,7 @@ const OfferProperty = () => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <Bookmark cardFavorCallback={cardFavorClickHandler} isFavorite={isFavorite} id={id}/>
+                <Bookmark onCardFavorClick={cardFavorClickHandler} isFavorite={isFavorite} id={id}/>
 
               </div>
               <div className="property__rating rating">

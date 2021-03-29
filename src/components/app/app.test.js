@@ -416,7 +416,7 @@ describe(`Test routing`, () => {
   });
 
   it(`Render 'Login' when user navigate to '/login' url`, () => {
-    const store = {MAIN: {city: ``}, USER: {authorizationStatus: `NO_AUTH`, userName: ``, avatarUrl: ``}};
+    const store = {MAIN: {city: ``}, USER: {authorizationStatus: `NO_AUTH`, userName: ``, avatarUrl: ``, errorMessage: ``}};
     const history = createMemoryHistory();
     history.push(`/login`);
 

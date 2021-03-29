@@ -16,8 +16,8 @@ it(`Render 'Toast'`, () => {
   );
 
   expect(screen.getByTestId(`toast`)).toBeInTheDocument();
-  expect(screen.getByText(`Error 404 try later`)).toBeInTheDocument();
+  expect(screen.getByText(`404 error. Please try later`)).toBeInTheDocument();
   setTimeout(() => {
-    expect(screen.getByText(`Error 404 try later`)).not.toBeInTheDocument();
+    expect(screen.getByText(`404 error. Please try later`)).not.toBeInTheDocument();
   }, 5000);
 });

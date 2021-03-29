@@ -9,7 +9,7 @@ describe(`Test 'Bookmark'`, () => {
   it(`Render 'Bookmark' when parameters 'isFavorite', is true`, () => {
 
     render(
-        <Bookmark cardFavorCallback={() => { }} isFavorite={true} id={1}/>
+        <Bookmark onCardFavorClick={() => { }} isFavorite={true} id={1}/>
     );
 
     expect(screen.getByTestId(`offer-property-bookmark`)).toBeInTheDocument();
@@ -20,7 +20,7 @@ describe(`Test 'Bookmark'`, () => {
   it(`Render 'Bookmark' when parameters 'isFavorite', is false`, () => {
 
     render(
-        <Bookmark cardFavorCallback={() => { }} isFavorite={false} id={1}/>
+        <Bookmark onCardFavorClick={() => { }} isFavorite={false} id={1}/>
     );
 
     expect(screen.getByTestId(`offer-property-bookmark`)).toBeInTheDocument();
@@ -30,7 +30,7 @@ describe(`Test 'Bookmark'`, () => {
   it(`Logic should worked correctly`, () => {
     const fakeCallback = jest.fn();
     render(
-        <Bookmark cardFavorCallback={fakeCallback} isFavorite={false} id={1}/>
+        <Bookmark onCardFavorClick={fakeCallback} isFavorite={false} id={1}/>
     );
 
     expect(screen.getByTestId(`offer-property-bookmark`)).toBeInTheDocument();

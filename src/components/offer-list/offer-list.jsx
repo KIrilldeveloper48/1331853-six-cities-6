@@ -28,7 +28,7 @@ const OfferList = ({offers, mode}) => {
   };
 
   return (
-    offers.map((offer) => <OfferCard key={offer.id} {...offer} mode={mode} cardFavorCallback={cardFavorClickHandler} mouseLeaveCallback={cardMouseLeaveHandler} mouseOverCallback={cardMouseOverHandler}/>)
+    offers.map((offer) => <OfferCard key={offer.id} {...offer} mode={mode} onCardFavorClick={cardFavorClickHandler} onCardMouseLeave={cardMouseLeaveHandler} onCardMouseOver={cardMouseOverHandler}/>)
   );
 };
 

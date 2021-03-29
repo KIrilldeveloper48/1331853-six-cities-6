@@ -7,16 +7,12 @@ import {offersPropValid} from './offer-card.prop';
 import {getOfferPath, getRatingCount} from '../../../utils';
 import {CARD_CLASS_NAME} from '../../../const';
 
-const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isFavorite, mode, cardFavorCallback, mouseLeaveCallback, mouseOverCallback}) => {
+const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isFavorite, mode, onCardFavorClick, onCardMouseLeave, onCardMouseOver}) => {
   const isCardPremium = isPremium && <div className="place-card__mark"><span>Premium</span></div>;
   const isCardFavorite = isFavorite ? `place-card__bookmark-button--active` : ``;
 
-  const cardFavorClickHandler = cardFavorCallback;
-  const cardMouseLeaveHandler = mouseLeaveCallback;
-  const cardMouseOverHandler = mouseOverCallback;
-
   return (
-    <article className={`${CARD_CLASS_NAME[mode].article} place-card`} onMouseOver={() => cardMouseOverHandler(id)} onMouseLeave={() => cardMouseLeaveHandler()} data-testid={`card-${id}`}>
+    <article className={`${CARD_CLASS_NAME[mode].article} place-card`} onMouseOver={() => onCardMouseLeave(id)} onMouseLeave={() => onCardMouseOver()} data-testid={`card-${id}`}>
       {isCardPremium}
       <div className={`${CARD_CLASS_NAME[mode].image} place-card__image-wrapper`} data-testid={`card-${id}-image`}>
         <Link to={getOfferPath(id)}>
@@ -29,7 +25,7 @@ const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isF
             <b className="place-card__price-value">{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isCardFavorite}`} type="button" onClick={() => cardFavorClickHandler(id, isFavorite)} data-testid={`card-${id}-bookmark`}>
+          <button className={`place-card__bookmark-button button ${isCardFavorite}`} type="button" onClick={() => onCardFavorClick(id, isFavorite)} data-testid={`card-${id}-bookmark`}>
             <svg className="place-card__bookmark-icon" width={18} height={19}>
               <use xlinkHref="#icon-bookmark" />
             </svg>
@@ -55,9 +51,9 @@ const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isF
 OfferCard.propTypes = {
   ...offersPropValid,
   mode: PropTypes.string.isRequired,
-  cardFavorCallback: PropTypes.func.isRequired,
-  mouseLeaveCallback: PropTypes.func.isRequired,
-  mouseOverCallback: PropTypes.func.isRequired
+  onCardFavorClick: PropTypes.func.isRequired,
+  onCardMouseLeave: PropTypes.func.isRequired,
+  onCardMouseOver: PropTypes.func.isRequired
 };
 
 
