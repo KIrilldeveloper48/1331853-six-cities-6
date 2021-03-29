@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {AuthorizationStatus, Routes} from '../../const';
+import {AuthorizationStatus, Routes} from '../../../const';
 
 
 const PrivateRoute = ({render, path, exact}) => {

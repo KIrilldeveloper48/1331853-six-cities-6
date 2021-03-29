@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {createMemoryHistory} from 'history';
 
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus} from '../../../const';
 import PrivateRoute from './private-route';
 
 
