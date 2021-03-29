@@ -25,6 +25,13 @@ const getFavoriteListWithoutCard = (offerId, currentFavoriteList) => {
   );
 };
 
+const getOpenedCardWithCurrentFavoriteStatus = (offer) => {
+  if (!Object.keys(offer).length) {
+    return {};
+  }
+  return Object.assign({}, offer, {isFavorite: !offer.isFavorite});
+};
+
 const initialState = {
   offers: [],
   isDataLoaded: false,
@@ -48,7 +55,7 @@ const data = createReducer(initialState, (builder) => {
   });
 
   builder.addCase(toggleOpenedCardFavor, (state) => {
-    state.openedOffer = Object.assign({}, state.openedOffer, {isFavorite: !state.openedOffer.isFavorite});
+    state.openedOffer = getOpenedCardWithCurrentFavoriteStatus(state.openedOffer);
   });
 
   builder.addCase(setOpenOffer, (state, action) => {
