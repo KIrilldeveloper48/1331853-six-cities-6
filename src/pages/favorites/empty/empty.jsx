@@ -4,7 +4,7 @@ import Footer from '../../../components/footer/footer';
 import Header from '../../../components/header/header';
 
 const FavoritesEmpty = () => (
-  <div className="page page--favorites-empty">
+  <div className="page page--favorites-empty" data-testid="favorite-empty">
     <Header />
     <main className="page__main page__main--favorites page__main--favorites-empty">
       <div className="page__favorites-container container">

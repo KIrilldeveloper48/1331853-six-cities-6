@@ -6,7 +6,7 @@ import {Routes} from '../../const';
 import "./page-404.css";
 
 const Page404 = () => (
-  <div className="container" style={{height: `100vh`}}>
+  <div className="container" style={{height: `100vh`}} data-testid="page-404">
     <Header />
     <div id="notfound">
       <div className="notfound">

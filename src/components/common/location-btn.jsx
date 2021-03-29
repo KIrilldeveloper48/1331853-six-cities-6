@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {Routes} from '../../const';
 
 const LocationBtn = ({city}) => (
-  <div className="locations__item">
+  <div className="locations__item" data-testid={`location-btn-${city}`}>
     <Link className="locations__item-link" to={Routes.MAIN}>
       <span>{city}</span>
     </Link>

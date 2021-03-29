@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useRouteMatch} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -15,7 +15,7 @@ import Loading from '../../components/loading/loading';
 import {getRatingCount} from '../../utils';
 import {AuthorizationStatus} from '../../const';
 import {fetchOpenedOfferData, toggleFavorOnServer} from '../../store/api-actions';
-import {toggleOpenedCardFavor} from '../../store/action';
+import Bookmark from '../../components/offer-property/bookmark/bookmark';
 
 
 const OfferProperty = () => {
@@ -25,11 +25,14 @@ const OfferProperty = () => {
   const dispatch = useDispatch();
 
   const match = useRouteMatch();
-  const pathId = match.params.id.slice(1);
+  const pathId = match.params.id;
+  useEffect(() => {
+    if (String(openedOffer.id) !== pathId) {
+      dispatch(fetchOpenedOfferData(pathId));
+    }
+  }, [pathId]);
 
   if (String(openedOffer.id) !== pathId) {
-    dispatch(fetchOpenedOfferData(pathId));
-
     return (
       <Loading />
     );
@@ -39,17 +42,16 @@ const OfferProperty = () => {
   const reviewList = currentReviews.length > 10 ? currentReviews.slice(0, MAX_REVIEWS_VISIBLE) : currentReviews;
 
   const {id, images, isPremium, isFavorite, title, rating, type, bedrooms, maxAdults, price, goods, host: {avatarUrl, name, isPro}, description} = openedOffer;
-  const isOfferPremium = isPremium && <div className="property__mark"><span>Premium</span></div>;
-  const isUserPro = isPro && <span className="property__user-status">Pro</span>;
-  const isCardFavorite = isFavorite ? `property__bookmark-button--active` : ``;
+  const isOfferPremium = isPremium && <div className="property__mark" data-testid="property-mark"><span>Premium</span></div>;
+  const isUserPro = isPro && <span className="property__user-status" data-testid="offer-property-user-pro">Pro</span>;
 
   const cardFavorClickHandler = (cardId, status) => {
     const newStatus = status ? 0 : 1;
     dispatch(toggleFavorOnServer(cardId, newStatus));
-    dispatch(toggleOpenedCardFavor());
   };
+
   return (
-    <div className="page">
+    <div className="page" data-testid="offer-property">
       <Toast />
       <Header />
       <main className="page__main page__main--property">
@@ -58,18 +60,14 @@ const OfferProperty = () => {
             <Gallery images={images}/>
           </div>
           <div className="property__container container">
-            <div className="property__wrapper">
+            <div className="property__wrapper" data-testid="property-wrapper">
               {isOfferPremium}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isCardFavorite} button`} type="button" onClick={()=> cardFavorClickHandler(id, isFavorite)}>
-                  <svg className="property__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <Bookmark cardFavorCallback={cardFavorClickHandler} isFavorite={isFavorite} id={id}/>
+
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -79,7 +77,7 @@ const OfferProperty = () => {
                 <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
-                <li className="property__feature property__feature--entire">
+                <li className="property__feature property__feature--entire" data-testid="offer-property-type">
                   {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
@@ -99,11 +97,11 @@ const OfferProperty = () => {
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
-                <div className="property__host-user user">
+                <div className="property__host-user user" data-testid="offer-property-user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={avatarUrl} alt="Host avatar" width={74} height={74} />
+                    <img className="property__avatar user__avatar" src={avatarUrl} alt="Host avatar" width={74} height={74} data-testid="offer-property-user-avatar"/>
                   </div>
-                  <span className="property__user-name">
+                  <span className="property__user-name" data-testid="offer-property-user-name">
                     {name}
                   </span>
                   {isUserPro}
@@ -115,7 +113,7 @@ const OfferProperty = () => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviewList.length}</span></h2>
+                <h2 className="reviews__title">Reviews · <span className="reviews__amount" data-testid="offer-property-review-count">{reviewList.length}</span></h2>
                 {
                   reviewList && <ReviewList reviews={reviewList} />
                 }

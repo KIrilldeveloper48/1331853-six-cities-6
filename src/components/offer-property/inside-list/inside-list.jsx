@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 const InsideList = ({goods}) => (
-  <ul className="property__inside-list">
+  <ul className="property__inside-list" data-testid="inside-list">
     {
       goods.map((good) => (
         <li key={good} className="property__inside-item">

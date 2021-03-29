@@ -1,4 +1,4 @@
-import {addCardToFavoriteList, changeUserAvatar, changeUserName, loadOffers, redirectToRoute, removeCardFromFavoriteList, requiredAuthorization, setCurrentReviews, setErrorMessage, setFavoriteList, setLoadingReviewStatus, setNearbyOffers, setOpenOffer, toggleFavor} from "./action";
+import {addCardToFavoriteList, changeUserAvatar, changeUserName, loadOffers, redirectToRoute, removeCardFromFavoriteList, requiredAuthorization, setCurrentReviews, setErrorMessage, setFavoriteList, setLoadingReviewStatus, setNearbyOffers, setOpenOffer, toggleFavor, toggleOpenedCardFavor} from "./action";
 import {APIRoute, AuthorizationStatus, avatarPlaceholder, HttpCode, LOCAL_STORE_KEYS, Routes, ReviewLoadingStatus} from './../const';
 import {adaptOfferToClient, adaptReviewsToClient} from "./adapters";
 import {sortDate} from "../utils";
@@ -8,8 +8,7 @@ const STORE_AUTH_PREFIX = `sixcities-auth-localstorage`;
 const STORE_VER = `v1`;
 const STORE_AUTH_NAME = `${STORE_AUTH_PREFIX}-${STORE_VER}`;
 
-const localStore = new Store(STORE_AUTH_NAME, window.localStorage);
-
+export const localStore = new Store(STORE_AUTH_NAME, window.localStorage);
 
 export const fetchOfferList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
@@ -68,6 +67,7 @@ export const toggleFavorOnServer = (id, status) => (dispatch, _getState, api) =>
     .then(({data}) => {
       const adaptedOffer = adaptOfferToClient(data);
       dispatch(toggleFavor(adaptedOffer));
+      dispatch(toggleOpenedCardFavor());
 
       if (status) {
         dispatch(addCardToFavoriteList(adaptedOffer));
@@ -122,32 +122,34 @@ export const submitComment = (id, {review: comment, rating}) => (dispatch, _getS
 
 export const checkAuth = () => (dispatch, _getState, api) => {
   const {authorizationStatus, email, avatarUrl} = localStore.getItems();
-
   if (authorizationStatus === AuthorizationStatus.AUTH) {
+
     dispatch(requiredAuthorization(AuthorizationStatus.AUTH));
     dispatch(changeUserName(email));
     dispatch(changeUserAvatar(avatarUrl));
-    return;
+    return ``;
+  } else {
+    return api.get(APIRoute.LOGIN)
+      .then(({data}) => {
+        dispatch(requiredAuthorization(AuthorizationStatus.AUTH));
+        dispatch(changeUserName(data.email));
+        dispatch(changeUserAvatar(data[`avatar_url`]));
+      })
+    .catch(() => {});
   }
 
-  api.get(APIRoute.LOGIN)
-    .then(({data}) => {
-      dispatch(requiredAuthorization(AuthorizationStatus.AUTH));
-      dispatch(changeUserName(data.email));
-      dispatch(changeUserAvatar(data[`avatar_url`]));
-    })
-    .catch(()=> {});
 };
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => {
+
       dispatch(requiredAuthorization(AuthorizationStatus.AUTH));
-      dispatch(changeUserName(email));
+      dispatch(changeUserName(data.email));
       dispatch(changeUserAvatar(data[`avatar_url`]));
 
       localStore.setItem(LOCAL_STORE_KEYS.AUTH, AuthorizationStatus.AUTH);
-      localStore.setItem(LOCAL_STORE_KEYS.EMAIL, email);
+      localStore.setItem(LOCAL_STORE_KEYS.EMAIL, data.email);
       localStore.setItem(LOCAL_STORE_KEYS.AVATAR_URL, data[`avatar_url`]);
 
       dispatch(redirectToRoute(Routes.MAIN));

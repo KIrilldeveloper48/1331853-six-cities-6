@@ -10,7 +10,7 @@ import {getRatingCount} from '../../../../utils';
 const ReviewItem = ({review}) => {
   const {user: {avatarUrl}, rating, comment, date} = review;
   return (
-    <li className="reviews__item">
+    <li className="reviews__item" data-testid={`review-${review.id}`}>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={avatarUrl} alt="Reviews avatar" width={54} height={54} />
@@ -28,7 +28,7 @@ const ReviewItem = ({review}) => {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={dayjs(date).format(`YYYY-MM-DD`)}>{dayjs(date).format(`MMMM YYYY`)}</time>
+        <time className="reviews__time" dateTime={dayjs(date).format(`YYYY-MM-DD`)} data-testid="review-data">{dayjs(date).format(`MMMM YYYY`)}</time>
       </div>
     </li>
   );
