@@ -224,7 +224,7 @@ describe(`Async operation work correctly`, () => {
 
     return togglerFavorOnServer(dispatch, () => { }, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.TOGGLE_FAVOR,
@@ -232,6 +232,10 @@ describe(`Async operation work correctly`, () => {
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.TOGGLE_OPENED_CARD_FAVOR,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.ADD_CARD_TO_FAVORITE_LIST,
           payload: adaptedOffer
         });
@@ -252,7 +256,7 @@ describe(`Async operation work correctly`, () => {
 
     return togglerFavorOnServer(dispatch, () => { }, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.TOGGLE_FAVOR,
@@ -260,10 +264,13 @@ describe(`Async operation work correctly`, () => {
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.TOGGLE_OPENED_CARD_FAVOR,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.REMOVE_CARD_FROM_FAVORITE_LIST,
           payload: adaptedOffer.id
         });
-
       });
   });
 
