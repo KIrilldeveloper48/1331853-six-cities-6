@@ -17,7 +17,7 @@ const Toast = () => {
 
   return (
     <div className="toast-container" style={{display: !errorMessage.length && `none`}} data-testid="toast">
-      <div className="toast-item">Error {errorMessage} try later</div>
+      <div className="toast-item">{errorMessage} error. Please try later</div>
     </div>
   );
 };
