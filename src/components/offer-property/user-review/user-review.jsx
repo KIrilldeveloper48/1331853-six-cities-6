@@ -2,11 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import Star from './star/star';
 import {STAR_LIST, ReviewValid, ReviewLoadingStatus} from '../../../const';
 import {useDispatch, useSelector} from 'react-redux';
-import {submitComment} from '../../../store/api-actions';
 import {setLoadingReviewStatus} from '../../../store/action';
+import {PropTypes} from 'prop-types';
 
-const UserReview = () => {
-  const {openedOffer, reviewLoadingStatus} = useSelector((state) => state.DATA);
+const UserReview = ({onFormSubmit}) => {
+  const {reviewLoadingStatus} = useSelector((state) => state.DATA);
   const dispatch = useDispatch();
 
   const submitButtonRef = useRef();
@@ -17,12 +17,6 @@ const UserReview = () => {
   const {review, rating} = userReview;
 
   const {MAX_LENGTH: maxLength, MIN_LENGTH: minLength} = ReviewValid;
-
-  const formSubmitHandler = (evt) => {
-    evt.preventDefault();
-    dispatch(submitComment(openedOffer.id, {review, rating}));
-    dispatch(setLoadingReviewStatus(ReviewLoadingStatus.LOADING));
-  };
 
   const formChangeHandler = (evt) => {
     if (evt.target.name === `rating`) {
@@ -60,7 +54,7 @@ const UserReview = () => {
   }, [reviewLoadingStatus]);
 
   return (
-    <form className="reviews__form form" action="#" method="post" onChange={(evt) => formChangeHandler(evt)} onSubmit={(evt) => formSubmitHandler(evt)} ref={formRef} data-testid="user-review">
+    <form className="reviews__form form" action="#" method="post" onChange={(evt) => formChangeHandler(evt)} onSubmit={(evt) => onFormSubmit(evt, review, rating)} ref={formRef} data-testid="user-review">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
@@ -76,6 +70,10 @@ const UserReview = () => {
       </div>
     </form>
   );
+};
+
+UserReview.propTypes = {
+  onFormSubmit: PropTypes.func.isRequired
 };
 
 

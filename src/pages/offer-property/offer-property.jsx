@@ -13,9 +13,10 @@ import Toast from '../../components/toast/toast';
 import Loading from '../../components/loading/loading';
 
 import {getRatingCount} from '../../utils';
-import {AuthorizationStatus} from '../../const';
-import {fetchOpenedOfferData, toggleFavorOnServer} from '../../store/api-actions';
+import {AuthorizationStatus, ReviewLoadingStatus} from '../../const';
+import {fetchOpenedOfferData, submitComment, toggleFavorOnServer} from '../../store/api-actions';
 import Bookmark from '../../components/offer-property/bookmark/bookmark';
+import {setLoadingReviewStatus} from '../../store/action';
 
 
 const OfferProperty = () => {
@@ -48,6 +49,12 @@ const OfferProperty = () => {
   const cardFavorClickHandler = (cardId, status) => {
     const newStatus = status ? 0 : 1;
     dispatch(toggleFavorOnServer(cardId, newStatus));
+  };
+
+  const formSubmitHandler = (evt, review, userRating) => {
+    evt.preventDefault();
+    dispatch(submitComment(id, {review, rating: userRating}));
+    dispatch(setLoadingReviewStatus(ReviewLoadingStatus.LOADING));
   };
 
   return (
@@ -118,7 +125,7 @@ const OfferProperty = () => {
                   reviewList && <ReviewList reviews={reviewList} />
                 }
 
-                {authorizationStatus === AuthorizationStatus.AUTH ? <UserReview /> : ``}
+                {authorizationStatus === AuthorizationStatus.AUTH ? <UserReview onFormSubmit={formSubmitHandler}/> : ``}
               </section>
             </div>
           </div>
