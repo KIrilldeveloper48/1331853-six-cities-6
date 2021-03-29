@@ -77,8 +77,9 @@ export const toggleFavorOnServer = (id, status) => (dispatch, _getState, api) =>
 
     })
     .catch((err) => {
-      const {response} = err;
-      switch (response.status) {
+      const responseStatus = err.response ? err.response.status : err.response;
+
+      switch (responseStatus) {
         case HttpCode.UNAUTHORIZED:
           dispatch(redirectToRoute(Routes.LOGIN));
           dispatch(changeUserAvatar(avatarPlaceholder));
@@ -87,8 +88,12 @@ export const toggleFavorOnServer = (id, status) => (dispatch, _getState, api) =>
           localStore.removeItem(LOCAL_STORE_KEYS.AVATAR_URL);
           break;
 
+        case undefined:
+          dispatch(setErrorMessage(`Connection`));
+          break;
+
         default:
-          dispatch(setErrorMessage(response.status));
+          dispatch(setErrorMessage(responseStatus));
           break;
       }
     })
@@ -102,8 +107,9 @@ export const submitComment = (id, {review: comment, rating}) => (dispatch, _getS
       dispatch(setLoadingReviewStatus(ReviewLoadingStatus.LOADED));
     })
     .catch((err) => {
-      const {response} = err;
-      switch (response.status) {
+      const responseStatus = err.response ? err.response.status : err.response;
+
+      switch (responseStatus) {
         case HttpCode.UNAUTHORIZED:
           dispatch(redirectToRoute(Routes.LOGIN));
           dispatch(changeUserAvatar(avatarPlaceholder));
@@ -112,8 +118,13 @@ export const submitComment = (id, {review: comment, rating}) => (dispatch, _getS
           localStore.removeItem(LOCAL_STORE_KEYS.AVATAR_URL);
           break;
 
+        case undefined:
+          dispatch(setErrorMessage(`Connection`));
+          dispatch(setLoadingReviewStatus(ReviewLoadingStatus.LOADING_FAILED));
+          break;
+
         default:
-          dispatch(setErrorMessage(response.status));
+          dispatch(setErrorMessage(responseStatus));
           dispatch(setLoadingReviewStatus(ReviewLoadingStatus.LOADING_FAILED));
           break;
       }
@@ -154,8 +165,18 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
       dispatch(redirectToRoute(Routes.MAIN));
     })
-    .catch(({response}) => {
-      dispatch(setErrorMessage(response.status));
+    .catch((err) => {
+      const responseStatus = err.response ? err.response.status : err.response;
+
+      switch (responseStatus) {
+        case undefined:
+          dispatch(setErrorMessage(`Connection`));
+          break;
+
+        default:
+          dispatch(setErrorMessage(responseStatus));
+          break;
+      }
     })
 );
 
@@ -169,7 +190,17 @@ export const logout = () => (dispatch, _getState, api) => (
       localStore.removeItem(LOCAL_STORE_KEYS.EMAIL);
       localStore.removeItem(LOCAL_STORE_KEYS.AVATAR_URL);
     })
-    .catch(({response}) => {
-      dispatch(setErrorMessage(response.status));
+    .catch((err) => {
+      const responseStatus = err.response ? err.response.status : err.response;
+
+      switch (responseStatus) {
+        case undefined:
+          dispatch(setErrorMessage(`Connection`));
+          break;
+
+        default:
+          dispatch(setErrorMessage(responseStatus));
+          break;
+      }
     })
 );
