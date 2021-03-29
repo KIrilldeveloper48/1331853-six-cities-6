@@ -15,7 +15,6 @@ import Loading from '../../components/loading/loading';
 import {getRatingCount} from '../../utils';
 import {AuthorizationStatus} from '../../const';
 import {fetchOpenedOfferData, toggleFavorOnServer} from '../../store/api-actions';
-import {toggleOpenedCardFavor} from '../../store/action';
 import Bookmark from '../../components/offer-property/bookmark/bookmark';
 
 
@@ -49,8 +48,8 @@ const OfferProperty = () => {
   const cardFavorClickHandler = (cardId, status) => {
     const newStatus = status ? 0 : 1;
     dispatch(toggleFavorOnServer(cardId, newStatus));
-    dispatch(toggleOpenedCardFavor());
   };
+
   return (
     <div className="page" data-testid="offer-property">
       <Toast />

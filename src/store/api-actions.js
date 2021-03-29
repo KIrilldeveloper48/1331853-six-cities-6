@@ -1,4 +1,4 @@
-import {addCardToFavoriteList, changeUserAvatar, changeUserName, loadOffers, redirectToRoute, removeCardFromFavoriteList, requiredAuthorization, setCurrentReviews, setErrorMessage, setFavoriteList, setLoadingReviewStatus, setNearbyOffers, setOpenOffer, toggleFavor} from "./action";
+import {addCardToFavoriteList, changeUserAvatar, changeUserName, loadOffers, redirectToRoute, removeCardFromFavoriteList, requiredAuthorization, setCurrentReviews, setErrorMessage, setFavoriteList, setLoadingReviewStatus, setNearbyOffers, setOpenOffer, toggleFavor, toggleOpenedCardFavor} from "./action";
 import {APIRoute, AuthorizationStatus, avatarPlaceholder, HttpCode, LOCAL_STORE_KEYS, Routes, ReviewLoadingStatus} from './../const';
 import {adaptOfferToClient, adaptReviewsToClient} from "./adapters";
 import {sortDate} from "../utils";
@@ -67,6 +67,7 @@ export const toggleFavorOnServer = (id, status) => (dispatch, _getState, api) =>
     .then(({data}) => {
       const adaptedOffer = adaptOfferToClient(data);
       dispatch(toggleFavor(adaptedOffer));
+      dispatch(toggleOpenedCardFavor());
 
       if (status) {
         dispatch(addCardToFavoriteList(adaptedOffer));
