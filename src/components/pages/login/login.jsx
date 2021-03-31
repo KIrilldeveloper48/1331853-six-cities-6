@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import LocationBtn from '../../components/common/location-btn';
-import Header from '../../components/header/header';
-import Toast from '../../components/toast/toast';
-import {login} from '../../store/api-actions';
+import LocationBtn from '../../common/location-btn';
+import Header from '../../header/header';
+import Toast from '../../toast/toast';
+import {login} from '../../../store/api-actions';
 
 const Login = () => {
   const {city} = useSelector((state) => state.MAIN);

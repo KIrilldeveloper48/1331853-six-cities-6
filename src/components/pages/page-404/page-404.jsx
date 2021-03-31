@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import Header from '../../components/header/header';
-import {Routes} from '../../const';
+import Header from '../../header/header';
+import {Routes} from '../../../const';
 import "./page-404.css";
 
 const Page404 = () => (

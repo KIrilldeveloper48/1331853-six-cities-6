@@ -1,18 +1,18 @@
 import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import Header from '../../components/header/header';
-import Locations from '../../components/main/locations/locations';
-import OfferList from '../../components/offer-list/offer-list';
-import Sort from '../../components/main/sort/sort';
-import Map from '../../components/map/map';
+import Header from '../../header/header';
+import Locations from '../../main/locations/locations';
+import OfferList from '../../offer-list/offer-list';
+import Sort from '../../main/sort/sort';
+import Map from '../../map/map';
 import MainEmpty from './empty/empty';
-import Toast from '../../components/toast/toast';
-import Loading from '../../components/loading/loading';
+import Toast from '../../toast/toast';
+import Loading from '../../loading/loading';
 
-import {fetchOfferList} from '../../store/api-actions';
-import {getCurrentOffers, getSortedOffers} from '../../store/selectors';
-import {setActiveOffer, setOpenOffer} from '../../store/action';
+import {fetchOfferList} from '../../../store/api-actions';
+import {getCurrentOffers, getSortedOffers} from '../../../store/selectors';
+import {setActiveOffer, setOpenOffer} from '../../../store/action';
 
 const Main = () => {
   const {city} = useSelector((state) => state.MAIN);

@@ -2,21 +2,21 @@ import React, {useEffect} from 'react';
 import {useRouteMatch} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
-import Header from '../../components/header/header';
-import UserReview from '../../components/offer-property/user-review/user-review';
-import Gallery from '../../components/offer-property/gallery/gallery';
-import InsideList from '../../components/offer-property/inside-list/inside-list';
-import ReviewList from '../../components/offer-property/review-list/review-list';
-import OfferList from '../../components/offer-list/offer-list';
-import Map from '../../components/map/map';
-import Toast from '../../components/toast/toast';
-import Loading from '../../components/loading/loading';
+import Header from '../../header/header';
+import UserReview from '../../offer-property/user-review/user-review';
+import Gallery from '../../offer-property/gallery/gallery';
+import InsideList from '../../offer-property/inside-list/inside-list';
+import ReviewList from '../../offer-property/review-list/review-list';
+import OfferList from '../../offer-list/offer-list';
+import Bookmark from '../../offer-property/bookmark/bookmark';
+import Map from '../../map/map';
+import Toast from '../../toast/toast';
+import Loading from '../../loading/loading';
 
-import {getRatingCount} from '../../utils';
-import {AuthorizationStatus, ReviewLoadingStatus} from '../../const';
-import {fetchOpenedOfferData, submitComment, toggleFavorOnServer} from '../../store/api-actions';
-import Bookmark from '../../components/offer-property/bookmark/bookmark';
-import {setLoadingReviewStatus} from '../../store/action';
+import {getRatingCount} from '../../../utils';
+import {AuthorizationStatus, ReviewLoadingStatus} from '../../../const';
+import {fetchOpenedOfferData, submitComment, toggleFavorOnServer} from '../../../store/api-actions';
+import {setLoadingReviewStatus} from '../../../store/action';
 
 
 const OfferProperty = () => {

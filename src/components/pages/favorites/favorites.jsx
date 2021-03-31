@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
 
-import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
-import Loading from '../../components/loading/loading';
-import Toast from '../../components/toast/toast';
+import Footer from '../../footer/footer';
+import Header from '../../header/header';
+import Loading from '../../loading/loading';
+import Toast from '../../toast/toast';
+import FavoriteItem from '../../favorites/favorite-item/favorite-item';
 import FavoritesEmpty from './empty/empty';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {changeCity} from '../../store/action';
-import {fetchFavoriteList} from './../../store/api-actions';
-import FavoriteItem from '../../components/favorites/favorite-item/favorite-item';
+import {changeCity} from '../../../store/action';
+import {fetchFavoriteList} from '../../../store/api-actions';
 
 
 const Favorites = () => {

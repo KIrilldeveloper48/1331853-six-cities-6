@@ -5,7 +5,7 @@ import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {Router} from 'react-router';
 
-import App from '../../components/app/app';
+import App from '../../app/app';
 
 const mockStore = configureStore();
 

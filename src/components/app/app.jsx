@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-import Main from '../../pages/main/main';
-import OfferProperty from '../../pages/offer-property/offer-property';
-import Favorites from '../../pages/favorites/favorites';
-import Page404 from '../../pages/page-404/page-404';
-import Login from '../../pages/login/login';
+import Main from '../pages/main/main';
+import OfferProperty from '../pages/offer-property/offer-property';
+import Favorites from '../pages/favorites/favorites';
+import Page404 from '../pages/page-404/page-404';
+import Login from '../pages/login/login';
 import PrivateRoute from '../hocs/private-route/private-route';
 
 import {Routes} from './../../const';

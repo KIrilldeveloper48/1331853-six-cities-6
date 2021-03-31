@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Footer from '../../../components/footer/footer';
-import Header from '../../../components/header/header';
+import Footer from '../../../footer/footer';
+import Header from '../../../header/header';
 
 const FavoritesEmpty = () => (
   <div className="page page--favorites-empty" data-testid="favorite-empty">
