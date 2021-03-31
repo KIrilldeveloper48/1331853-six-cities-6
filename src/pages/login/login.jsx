@@ -12,6 +12,15 @@ const Login = () => {
   const loginRef = useRef();
   const passwordRef = useRef();
 
+  const checkValidHandler = () => {
+    let validMask = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if (validMask.test(loginRef.current.value)) {
+      loginRef.current.setCustomValidity(``);
+    } else {
+      loginRef.current.setCustomValidity(`Please provide a correct email address. Example: 'main@mail.com'`);
+    }
+  };
+
   const formSubmitHandler = (evt) => {
     evt.preventDefault();
     dispatch(login({
@@ -32,7 +41,7 @@ const Login = () => {
               <form className="login__form form" action="#" method="post" onSubmit={formSubmitHandler}>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden" htmlFor="input-email">E-mail</label>
-                  <input id="input-email" className="login__input form__input" type="email" name="email" placeholder="Email" required ref={loginRef} data-testid="login"/>
+                  <input id="input-email" className="login__input form__input" type="email" name="email" placeholder="Email" required ref={loginRef} data-testid="login" onInput={checkValidHandler}/>
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden" htmlFor="input-password">Password</label>
