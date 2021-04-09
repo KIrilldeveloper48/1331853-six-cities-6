@@ -12,7 +12,7 @@ const OfferCard = ({id, previewImage, price, type, rating, isPremium, title, isF
   const isCardFavorite = isFavorite ? `place-card__bookmark-button--active` : ``;
 
   return (
-    <article className={`${CARD_CLASS_NAME[mode].article} place-card`} onMouseOver={() => onCardMouseLeave(id)} onMouseLeave={() => onCardMouseOver()} data-testid={`card-${id}`}>
+    <article className={`${CARD_CLASS_NAME[mode].article} place-card`} onMouseOver={() => onCardMouseOver(id)} onMouseLeave={() => onCardMouseLeave()} data-testid={`card-${id}`}>
       {isCardPremium}
       <div className={`${CARD_CLASS_NAME[mode].image} place-card__image-wrapper`} data-testid={`card-${id}-image`}>
         <Link to={getOfferPath(id)}>
